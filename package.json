@@ -5,6 +5,7 @@
   "description": "Local prototype financial tracker with JSON-file persistence and REST endpoints.",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "start:agent": "node agent-server.js"
   }
 }

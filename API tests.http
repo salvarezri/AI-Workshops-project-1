@@ -1,19 +1,110 @@
-GET http://localhost:3000/api/tags HTTP/1.1
+### ==========================================
+### 1. Existing Financial Tracker API (Port 3000)
+### ==========================================
+
+### Get All Expenses
+GET http://localhost:3000/api/expenses HTTP/1.1
 
 ###
 
-GET http://localhost:3000/ HTTP/1.1
-
-###
-
+### Create an Expense
 POST http://localhost:3000/api/expenses HTTP/1.1
-content-type: application/json
+Content-Type: application/json
 
 {
-  "amount": 250.56,
-  "date": "2026-07-20",
+  "amount": 25.5,
+  "date": "2026-07-19",
   "tags": ["food", "personal"],
-  "description": "Chocorramo",
-  "account": "Cash",
+  "description": "Lunch",
+  "account": "Credit card",
   "verified": false
 }
+
+###
+
+### Update an Expense (Replace :id with a valid UUID from GET /api/expenses)
+PATCH http://localhost:3000/api/expenses/e3365038-5de1-4dc9-bb34-dd84931c143f HTTP/1.1
+Content-Type: application/json
+
+{
+  "description": "Lunch at REST API Cafe",
+  "verified": true
+}
+
+###
+
+### Delete an Expense (Replace :id with a valid UUID from GET /api/expenses)
+DELETE http://localhost:3000/api/expenses/replace-with-actual-uuid HTTP/1.1
+
+###
+
+### Get All Incomes
+GET http://localhost:3000/api/incomes HTTP/1.1
+
+###
+
+### Create an Income
+POST http://localhost:3000/api/incomes HTTP/1.1
+Content-Type: application/json
+
+{
+  "amount": 1200,
+  "date": "2026-07-19",
+  "tags": ["salary"],
+  "description": "Payroll",
+  "account": "Checking"
+}
+
+###
+
+### Update an Income (Replace :id with a valid UUID from GET /api/incomes)
+PATCH http://localhost:3000/api/incomes/replace-with-actual-uuid HTTP/1.1
+Content-Type: application/json
+
+{
+  "amount": 1250,
+  "description": "Monthly Payroll + Bonus"
+}
+
+###
+
+### Delete an Income (Replace :id with a valid UUID from GET /api/incomes)
+DELETE http://localhost:3000/api/incomes/replace-with-actual-uuid HTTP/1.1
+
+###
+
+### Get Reports
+GET http://localhost:3000/api/reports HTTP/1.1
+
+###
+
+### Get Tags List
+GET http://localhost:3000/api/tags HTTP/1.1
+
+
+### ==========================================
+### 2. New LLM Agent Gateway API (Port 3001)
+### ==========================================
+
+### Send Natural Language Message to LLM Gateway (Creates an Expense)
+POST http://localhost:3001/ HTTP/1.1
+Content-Type: application/json
+
+{
+  "message": "one hour ago I bought a Chocorramo for five twenty nine"
+}
+
+###
+
+### Send Natural Language Message (Creates an Income)
+POST http://localhost:3001/ HTTP/1.1
+Content-Type: application/json
+
+{
+  "message": "Yesterday I received a bonus from work of five hundred dollars into my Savings account"
+}
+
+###
+
+### Test Connectivity to LLM Gateway
+GET http://localhost:3001/test HTTP/1.1

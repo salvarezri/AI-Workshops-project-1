@@ -48,10 +48,24 @@
       "food",
       "personal"
     ],
-    "description": "Chocorramo",
+    "description": "Lunch at REST API Cafe",
     "account": "Cash",
     "verified": true,
     "createdAt": "2026-07-20T22:25:40.389Z",
-    "updatedAt": "2026-07-21T02:09:52.223Z"
+    "updatedAt": "2026-07-21T04:21:12.983Z"
+  },
+  {
+    "id": "bf8bdf22-f524-4b13-b166-ce2c54edbb1b",
+    "amount": 25.5,
+    "date": "2026-07-19",
+    "tags": [
+      "food",
+      "personal"
+    ],
+    "description": "Lunch",
+    "account": "Credit card",
+    "verified": false,
+    "createdAt": "2026-07-21T04:14:16.845Z",
+    "updatedAt": "2026-07-21T04:14:16.845Z"
   }
 ]
