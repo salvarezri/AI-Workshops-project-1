@@ -1,0 +1,57 @@
+[
+  {
+    "id": "sample-expense-1",
+    "amount": 42.75,
+    "date": "2026-07-16",
+    "tags": [
+      "food",
+      "personal"
+    ],
+    "description": "Team lunch",
+    "account": "Credit card",
+    "verified": true,
+    "createdAt": "2026-07-16T12:00:00.000Z",
+    "updatedAt": "2026-07-21T02:09:47.056Z"
+  },
+  {
+    "id": "sample-expense-2",
+    "amount": 120,
+    "date": "2026-07-10",
+    "tags": [
+      "transport"
+    ],
+    "description": "Monthly transit pass",
+    "account": "Debit",
+    "verified": true,
+    "createdAt": "2026-07-10T09:00:00.000Z",
+    "updatedAt": "2026-07-10T09:00:00.000Z"
+  },
+  {
+    "id": "583d8c39-f5b4-4dff-b238-45abe9aa237c",
+    "amount": 250,
+    "date": "2026-07-19",
+    "tags": [
+      "music",
+      "suscriptions"
+    ],
+    "description": "payment of spotify",
+    "account": "credit card",
+    "verified": true,
+    "createdAt": "2026-07-19T19:41:32.183Z",
+    "updatedAt": "2026-07-21T02:09:51.343Z"
+  },
+  {
+    "id": "e3365038-5de1-4dc9-bb34-dd84931c143f",
+    "amount": 250.56,
+    "date": "2026-07-20",
+    "tags": [
+      "food",
+      "personal"
+    ],
+    "description": "Chocorramo",
+    "account": "Cash",
+    "verified": true,
+    "createdAt": "2026-07-20T22:25:40.389Z",
+    "updatedAt": "2026-07-21T02:09:52.223Z"
+  }
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "id": "sample-income-1",
+    "amount": 3200,
+    "date": "2026-07-01",
+    "tags": [
+      "salary"
+    ],
+    "description": "Monthly salary",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2026-07-01T08:00:00.000Z",
+    "updatedAt": "2026-07-01T08:00:00.000Z"
+  },
+  {
+    "id": "sample-income-2",
+    "amount": 450,
+    "date": "2026-06-22",
+    "tags": [
+      "freelance",
+      "consulting"
+    ],
+    "description": "Workshop session",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2026-06-22T18:00:00.000Z",
+    "updatedAt": "2026-06-22T18:00:00.000Z"
+  },
+  {
+    "id": "a1e0a830-0461-4d88-9a00-0fc15bf6dfef",
+    "amount": 1000,
+    "date": "2026-07-19",
+    "tags": [
+      "salary"
+    ],
+    "description": "office payment",
+    "account": "cash",
+    "verified": true,
+    "createdAt": "2026-07-19T19:47:44.327Z",
+    "updatedAt": "2026-07-19T19:47:44.327Z"
+  }
+]

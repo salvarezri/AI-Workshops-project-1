@@ -1,0 +1,10 @@
+{
+  "name": "financial-tracker-prototype",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local prototype financial tracker with JSON-file persistence and REST endpoints.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  }
+}

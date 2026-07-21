@@ -1,0 +1,19 @@
+GET http://localhost:3000/api/tags HTTP/1.1
+
+###
+
+GET http://localhost:3000/ HTTP/1.1
+
+###
+
+POST http://localhost:3000/api/expenses HTTP/1.1
+content-type: application/json
+
+{
+  "amount": 250.56,
+  "date": "2026-07-20",
+  "tags": ["food", "personal"],
+  "description": "Chocorramo",
+  "account": "Cash",
+  "verified": false
+}

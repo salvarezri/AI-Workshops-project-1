@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Financial Tracker Prototype</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <main class="shell">
+      <section class="topbar" aria-labelledby="app-title">
+        <div>
+          <p class="eyebrow">Local JSON prototype</p>
+          <h1 id="app-title">Financial Tracker</h1>
+        </div>
+        <div class="status" id="save-status" role="status">Ready</div>
+      </section>
+
+      <section class="metrics" aria-label="Financial summary">
+        <article>
+          <span>Total income</span>
+          <strong id="metric-income">$0.00</strong>
+        </article>
+        <article>
+          <span>Total expenses</span>
+          <strong id="metric-expenses">$0.00</strong>
+        </article>
+        <article>
+          <span>Net balance</span>
+          <strong id="metric-net">$0.00</strong>
+        </article>
+        <article>
+          <span>Unverified expenses</span>
+          <strong id="metric-unverified">0</strong>
+        </article>
+      </section>
+
+      <section class="workspace">
+        <div class="panel entry-panel">
+          <div class="tabs" role="tablist" aria-label="Entry type">
+            <button class="tab active" type="button" data-entry-type="expenses">Expense</button>
+            <button class="tab" type="button" data-entry-type="incomes">Income</button>
+          </div>
+
+          <form id="entry-form">
+            <input type="hidden" name="type" value="expenses">
+            <label>
+              Amount
+              <input name="amount" type="number" min="0.01" step="0.01" placeholder="125.50" required>
+            </label>
+            <label>
+              Date
+              <input name="date" type="date" required>
+            </label>
+            <label>
+              Tags
+              <input name="tags" type="text" placeholder="food, travel, client" required>
+            </label>
+            <label>
+              Description
+              <input name="description" type="text" placeholder="What was this for?">
+            </label>
+            <label>
+              Account
+              <input name="account" type="text" placeholder="Cash, credit card, checking">
+            </label>
+            <label class="checkbox-row" id="verified-row">
+              <input name="verified" type="checkbox">
+              Mark expense as already verified
+            </label>
+            <button class="primary" type="submit" id="submit-button">Add expense</button>
+          </form>
+        </div>
+
+        <div class="panel list-panel">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">Verify and audit</p>
+              <h2>Expenses</h2>
+            </div>
+            <select id="expense-filter" aria-label="Filter expenses">
+              <option value="all">All expenses</option>
+              <option value="unverified">Unverified only</option>
+              <option value="verified">Verified only</option>
+            </select>
+          </div>
+          <div class="record-list" id="expense-list"></div>
+        </div>
+      </section>
+
+      <section class="reports">
+        <div class="section-header">
+          <div>
+            <p class="eyebrow">Reports</p>
+            <h2>Spending and Income Analysis</h2>
+          </div>
+        </div>
+        <div class="report-grid">
+          <div class="panel">
+            <h3>Expenses by tag</h3>
+            <div id="expenses-by-tag" class="bar-list"></div>
+          </div>
+          <div class="panel">
+            <h3>Income by tag</h3>
+            <div id="incomes-by-tag" class="bar-list"></div>
+          </div>
+          <div class="panel wide">
+            <h3>Historical monthly cashflow</h3>
+            <div id="monthly-cashflow" class="history"></div>
+          </div>
+          <div class="panel wide">
+            <h3>Recent income</h3>
+            <div class="record-list compact" id="income-list"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="api-note">
+        <strong>Prototype endpoints:</strong>
+        <code>POST /api/expenses</code>
+        <code>POST /api/incomes</code>
+        <code>GET /api/reports</code>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
