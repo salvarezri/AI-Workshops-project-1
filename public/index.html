@@ -36,7 +36,8 @@
       </section>
 
       <section class="workspace">
-        <div class="panel entry-panel">
+        <div class="sidebar-column">
+          <div class="panel entry-panel">
           <div class="tabs" role="tablist" aria-label="Entry type">
             <button class="tab active" type="button" data-entry-type="expenses">Expense</button>
             <button class="tab" type="button" data-entry-type="incomes">Income</button>
@@ -72,7 +73,23 @@
           </form>
         </div>
 
-        <div class="panel list-panel">
+        <div class="panel ai-panel">
+          <p class="eyebrow">AI Assistant</p>
+          <h3>Add with Natural Language</h3>
+          <form id="ai-form">
+            <textarea id="ai-text-input" placeholder="e.g., Yesterday I spent 45 dollars on groceries with checking account" rows="3" required></textarea>
+            <div class="ai-actions">
+              <button class="primary" id="ai-send-btn" type="submit">Send to AI</button>
+              <button id="ai-mic-btn" type="button" title="Record voice prompt">
+                <span id="mic-icon">🎙️</span>
+              </button>
+            </div>
+            <div id="ai-status"></div>
+          </form>
+        </div>
+      </div>
+
+      <div class="panel list-panel">
           <div class="section-header">
             <div>
               <p class="eyebrow">Verify and audit</p>

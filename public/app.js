@@ -274,3 +274,159 @@ els.incomeList.addEventListener("click", handleListClick);
 els.form.elements.date.value = new Date().toISOString().slice(0, 10);
 setEntryType("expenses");
 loadData();
+
+// AI Assistant Features
+const aiEls = {
+  form: document.querySelector("#ai-form"),
+  textInput: document.querySelector("#ai-text-input"),
+  sendBtn: document.querySelector("#ai-send-btn"),
+  micBtn: document.querySelector("#ai-mic-btn"),
+  micIcon: document.querySelector("#mic-icon"),
+  status: document.querySelector("#ai-status"),
+};
+
+let mediaRecorder = null;
+let audioChunks = [];
+
+function setAiStatus(text) {
+  aiEls.status.textContent = text;
+}
+
+// Submit Natural Language prompt to Port 3001
+async function submitAiText(event) {
+  event.preventDefault();
+  const text = aiEls.textInput.value.trim();
+  if (!text) return;
+
+  try {
+    setAiStatus("AI is parsing transaction...");
+    aiEls.sendBtn.disabled = true;
+
+    // Call Port 3001 Parser
+    const parserUrl = "http://localhost:3001/api/parse";
+    const res = await fetch(parserUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: text })
+    });
+
+    if (!res.ok) {
+      const errData = await res.json();
+      throw new Error(errData.error || "Failed to parse message with AI.");
+    }
+
+    const { transaction } = await res.json();
+    setAiStatus(`AI resolved: ${transaction.type === "expenses" || transaction.type === "expense" ? "Expense" : "Income"} of $${transaction.amount}. Saving...`);
+
+    // Prepare payload for local tracker (Port 3000)
+    const resolvedType = (transaction.type === "expenses" || transaction.type === "expense") ? "expenses" : "incomes";
+    const payload = {
+      amount: Number(transaction.amount),
+      date: transaction.date,
+      tags: Array.isArray(transaction.tags) ? transaction.tags : [transaction.tags].filter(Boolean),
+      description: transaction.description || "Parsed by AI",
+      account: transaction.account || "Cash",
+      verified: false
+    };
+
+    // Post to Port 3000 local tracker endpoints
+    const apiRes = await fetch(`/api/${resolvedType}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+
+    if (!apiRes.ok) {
+      const apiErr = await apiRes.json();
+      throw new Error(apiErr.error || "Failed to save the transaction to tracker database.");
+    }
+
+    setAiStatus("Transaction added successfully!");
+    aiEls.textInput.value = "";
+    await loadData();
+  } catch (error) {
+    console.error("[AI Assistant Error]", error);
+    setAiStatus(`Error: ${error.message}`);
+  } finally {
+    aiEls.sendBtn.disabled = false;
+  }
+}
+
+// Audio Recording Logic (utilizing Port 3002 STT)
+async function toggleVoiceRecording() {
+  if (mediaRecorder && mediaRecorder.state === "recording") {
+    // Stop recording
+    mediaRecorder.stop();
+    return;
+  }
+
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    audioChunks = [];
+    mediaRecorder = new MediaRecorder(stream, { mimeType: "audio/webm" });
+
+    mediaRecorder.ondataavailable = (event) => {
+      if (event.data.size > 0) {
+        audioChunks.push(event.data);
+      }
+    };
+
+    mediaRecorder.onstop = async () => {
+      // Clean up audio tracks
+      stream.getTracks().forEach(track => track.stop());
+
+      try {
+        setAiStatus("Sending voice to Speech-to-Text service...");
+        const audioBlob = new Blob(audioChunks, { type: "audio/webm" });
+
+        // Send raw audio buffer to Port 3002 Transcribe Endpoint
+        const sttRes = await fetch("http://localhost:3002/api/transcribe", {
+          method: "POST",
+          headers: { "Content-Type": "audio/webm" },
+          body: audioBlob
+        });
+
+        if (!sttRes.ok) {
+          const sttErr = await sttRes.json();
+          throw new Error(sttErr.error || "Transcription failed.");
+        }
+
+        const data = await sttRes.json();
+        if (data.text) {
+          aiEls.textInput.value = data.text;
+          setAiStatus("Voice transcribed successfully!");
+        } else {
+          setAiStatus("Could not transcribe voice. Please try again.");
+        }
+
+      } catch (error) {
+        console.error("[STT Error]", error);
+        setAiStatus(`Transcription error: ${error.message}`);
+      } finally {
+        // Reset recording UI button
+        aiEls.micBtn.classList.remove("mic-recording");
+        aiEls.micIcon.textContent = "🎙️";
+      }
+    };
+
+    // Start recording
+    mediaRecorder.start();
+    aiEls.micBtn.classList.add("mic-recording");
+    aiEls.micIcon.textContent = "🟥";
+    setAiStatus("Recording... Click mic button again to stop.");
+
+  } catch (error) {
+    console.error("[Microphone Access Error]", error);
+    setAiStatus(`Microphone error: ${error.message}`);
+    aiEls.micBtn.classList.remove("mic-recording");
+    aiEls.micIcon.textContent = "🎙️";
+  }
+}
+
+// Add AI Listeners
+if (aiEls.form) {
+  aiEls.form.addEventListener("submit", submitAiText);
+}
+if (aiEls.micBtn) {
+  aiEls.micBtn.addEventListener("click", toggleVoiceRecording);
+}

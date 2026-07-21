@@ -108,3 +108,30 @@ Content-Type: application/json
 
 ### Test Connectivity to LLM Gateway
 GET http://localhost:3001/test HTTP/1.1
+
+###
+
+### Send Natural Language Message to Parse JSON (No database writes)
+POST http://localhost:3001/api/parse HTTP/1.1
+Content-Type: application/json
+
+{
+  "message": "two days ago I bought a laptop with my credit card for a thousand dollars"
+}
+
+###
+
+### Send Raw Audio File to Speech Service to Transcribe (Port 3002)
+# Note: In VS Code Rest Client, you can upload a local file using <@ path/to/file.webm
+POST http://localhost:3002/api/transcribe HTTP/1.1
+Content-Type: audio/webm
+
+< ./public/test-audio.webm
+
+###
+
+### Send Raw Audio File to Create a Transaction directly (Port 3002)
+POST http://localhost:3002/api/voice-transaction HTTP/1.1
+Content-Type: audio/webm
+
+< ./public/test-audio.webm

@@ -393,3 +393,75 @@ code {
     justify-content: flex-start;
   }
 }
+
+/* Sidebar Column Layout */
+.sidebar-column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* AI Assistant Panel Styling */
+.ai-panel textarea {
+  width: 100%;
+  resize: vertical;
+  min-height: 80px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 10px;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.ai-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.ai-actions .primary {
+  flex: 1;
+  margin-top: 0;
+}
+
+#ai-mic-btn {
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  background: #fff;
+  cursor: pointer;
+  font-size: 20px;
+  min-height: 40px;
+  transition: all 0.2s ease-in-out;
+}
+
+#ai-mic-btn:hover {
+  background: #f4f6f9;
+  border-color: var(--muted);
+}
+
+/* Mic Recording Active Pulsing State */
+.mic-recording {
+  background: var(--warning) !important;
+  color: #fff !important;
+  border-color: var(--warning) !important;
+  animation: micPulse 1.5s infinite;
+}
+
+@keyframes micPulse {
+  0% { opacity: 1.0; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1.0; }
+}
+
+#ai-status {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+  font-style: italic;
+  min-height: 18px;
+}

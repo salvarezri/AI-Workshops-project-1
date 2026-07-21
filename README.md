@@ -1,6 +1,6 @@
 # Financial Tracker Prototype
 
-A local prototype for tracking expenses and income with JSON-file persistence, plus a new LLM natural-language gateway.
+A local prototype for tracking expenses and income with JSON-file persistence, an LLM natural-language gateway (port 3001), and a native Speech-to-Text audio service (port 3002).
 
 ## 🚀 Run the Services
 
@@ -19,17 +19,25 @@ http://localhost:3000
 
 ### 2. Start the LLM Agent Gateway (Port 3001)
 
-Before running, set your Gemini API key (see [Configuration](#-configuration) below).
+Performs NLP processing and multi-turn tool calling. Make sure your API key is set (see [Configuration](#-configuration)).
 
 ```powershell
 .\start-agent.ps1
+```
+
+### 3. Start the Speech-to-Text Service (Port 3002)
+
+Transcribes voice recordings and manages direct voice transactions using Gemini's native audio model.
+
+```powershell
+.\start-speech.ps1
 ```
 
 ---
 
 ## 🛠 Configuration
 
-Create a file named `.env` in the root directory. This file will hold the settings for the LLM agent:
+Create a file named `.env` in the root directory:
 
 ```env
 # Google Gemini API Key
@@ -41,16 +49,10 @@ GEMINI_MODEL=gemini-2.5-flash
 # Base URL of the Financial Tracker REST service
 TRACKER_API_URL=http://localhost:3000
 
-# Port for the LLM Gateway service
+# Ports configurations
 PORT=3001
+SPEECH_PORT=3002
 ```
-
-### 🪙 Token Optimization & Cost Controls
-To prevent high token consumption and keep within free tier limits:
-1. **Lightweight Model**: The gateway is hardcoded/configured to use `gemini-2.5-flash`. Its job is to generate tool-use schemas, not write elaborate prose.
-2. **Output Token Hard-cap**: The `maxOutputTokens` is capped at `300` in `llm-provider.js`.
-3. **Low Temperature**: Set `temperature: 0` for deterministic function calls and no conversational drift.
-4. **Structured System Instruction**: Instructs the model to only invoke tools and output a single-sentence response upon completion.
 
 ---
 
@@ -65,39 +67,21 @@ All endpoints can be found and executed in [API tests.http](file:///c:/Users/san
 - `DELETE /api/expenses/:id` - Delete an expense
 - `GET /api/incomes` - List all incomes
 - `POST /api/incomes` - Create a new income
-- `PATCH /api/incomes/:id` - Update an income
-- `DELETE /api/incomes/:id` - Delete an income
 - `GET /api/reports` - Fetch money analytics/charts data
-- `GET /api/tags` - List tags with expense/income statistics
+- `GET /api/tags` - List tags with statistics
 
 ### LLM Agent Gateway (Port 3001)
-- `POST /` - Accepts natural language input via `{ "message": "..." }` and records transactions.
+- `POST /` - Runs full agent loop and creates the transaction.
+- `POST /api/parse` - Parses a natural language sentence and returns a structured JSON object representing the transaction without writing to the database directly.
 
-#### Example payload:
-```json
-{
-  "message": "one hour ago I bought a Chocorramo for five twenty nine"
-}
-```
-The gateway will:
-1. Fetch existing tags to select the most relevant match (e.g. `food`).
-2. Run `calculateDate` to compute "NOW minus 1 hour".
-3. Record the transaction using `createExpense(amount: 5.29, date: "YYYY-MM-DD", tags: ["food"], description: "Chocorramo", account: "Cash", verified: false)`.
-4. Respond with success status and details.
+### Speech to Text Service (Port 3002)
+- `POST /api/transcribe` - Accepts a raw audio file (e.g. `audio/webm` or `audio/wav`) in the request body, transcribes it, and returns the transcript text in the response body.
+- `POST /api/voice-transaction` - Accepts a raw audio file, transcribes it, and automatically forwards the transcript to port 3001 to run the agent loop and record the transaction.
 
 ---
 
-## 🔄 Interchangeability (Other LLM Providers)
+## 🎙️ UI Voice Features
 
-The system is designed with an interchangeable LLM client:
-1. **Provider-Agnostic Message History**: The core agent loop uses a clean message layout containing roles (`user`, `assistant`, `tool`) and standard payloads.
-2. **Provider Adapters**: Under [llm-provider.js](file:///c:/Users/santi/OneDrive/Documents/AI%20Workshops/llm-provider.js), you can write and instantiate another adapter (e.g. `OpenAIProvider`, `AnthropicProvider`) following the same `generate` method interface, mapping our clean messages to their respective API structure.
-
----
-
-## 📈 Future Improvements (Production Readiness)
-
-1. **Structured Outputs**: Use Gemini's JSON schema mode (`responseMimeType: "application/json"`) to ensure error-free structured responses from the LLM.
-2. **Session Persistence**: Keep conversation history in a database (like Redis) keyed by session IDs to support ongoing interactive chats instead of stateless single-requests.
-3. **Advanced Natural Date Parsing**: Integrate library-based relative date parsers (e.g. `chrono-node`) in `tools.js` to back up and support complex edge-case language (e.g. "third Friday of last month").
-4. **Tag Clustering & Similarity**: Use a text-embeddings LLM service to do semantic matches between the user's input and existing tags (e.g. matching "subway ride" automatically to "transportation").
+On the dashboard (`http://localhost:3000`), a new **AI Assistant** panel is available:
+1. **Add with Natural Language**: Type a sentence like `"Yesterday I spent fifty dollars on food using my credit card"` and press **Send to AI**. The system calls port 3001 to parse it to a clean JSON object, then creates the record in the local database.
+2. **Speech-to-Text Recording**: Click the 🎙️ mic button to start recording from your microphone. Click the red 🟥 stop button to finish. The raw webm audio is sent to port 3002 for transcription, and the text area is automatically updated with the transcribed words.

@@ -123,6 +123,127 @@ async function handleRequest(req, res) {
     return;
   }
 
+  // AI Transaction Parsing Endpoint
+  if (url.pathname === "/api/parse" || url.pathname === "/parse") {
+    try {
+      const body = await readBody(req);
+      const userMessage = body.message || body.text;
+
+      if (!userMessage || typeof userMessage !== "string") {
+        sendJson(res, 400, { error: "Please provide a 'message' or 'text' string in the request body." });
+        return;
+      }
+
+      const localTime = getLocalISOString();
+      const modelName = process.env.GEMINI_MODEL || "gemini-2.5-flash";
+      const provider = new GeminiProvider(apiKey, modelName);
+
+      // Exclude database write tools - only use tag reference and date calculators
+      const parserTools = toolDeclarations.filter(t => t.name === "getTags" || t.name === "calculateDate");
+
+      const systemInstruction = `You are a financial transaction parser.
+Your task is to parse the user's natural language input, categorize it as income or expense, resolve categories and relative date offsets, and return the details in a structured JSON object.
+
+Current Date and Time is: ${localTime}.
+
+Guidelines:
+1. ALWAYS call 'getTags' in parallel at the start to fetch existing categories.
+2. If the user mentions a relative time (e.g. 'one hour ago', 'yesterday'), use 'calculateDate' tool with base date 'currentDate' (value: ${localTime}) and the offset expression. If no time is specified, use today's date (${localTime.slice(0, 10)}).
+3. Select the most plausible tags from the retrieved tags list. If none fit, feel free to generate a new tag.
+4. Once you have all the transaction details (type, amount, date, tags, description, account), construct a final response.
+5. The final response MUST be a valid JSON object matching the schema below. Do NOT wrap it in markdown code blocks.
+   Required JSON Schema:
+   {
+     "type": "expense" or "income",
+     "amount": number (e.g. 5.29),
+     "date": "YYYY-MM-DD",
+     "tags": ["tag1", "tag2", ...],
+     "description": "string",
+     "account": "string"
+   }`;
+
+      console.log(`[Agent Parser] Processing message: "${userMessage}"`);
+      console.log(`[Agent Parser] Reference Time: ${localTime}`);
+
+      const history = [
+        { role: "user", content: userMessage }
+      ];
+
+      let turns = 0;
+      const maxTurns = 5;
+      const steps = [];
+      let finalAnswer = "";
+
+      while (turns < maxTurns) {
+        turns++;
+        console.log(`[Agent Parser] Calling Gemini API (Turn ${turns})...`);
+
+        const result = await provider.generate({
+          messages: history,
+          systemInstruction,
+          tools: parserTools
+        });
+
+        const assistantMessage = {
+          role: "assistant",
+          content: result.text || null,
+          parts: result.rawParts
+        };
+        if (result.functionCalls && result.functionCalls.length > 0) {
+          assistantMessage.functionCalls = result.functionCalls;
+        }
+        history.push(assistantMessage);
+
+        if (result.functionCalls && result.functionCalls.length > 0) {
+          console.log(`[Agent Parser] Executing function calls:`, result.functionCalls.map(c => c.name));
+          steps.push({
+            turn: turns,
+            calls: result.functionCalls
+          });
+
+          const functionResponses = [];
+          for (const call of result.functionCalls) {
+            const outcome = await executeTool(call.name, call.args);
+            functionResponses.push({
+              name: call.name,
+              response: outcome
+            });
+          }
+
+          history.push({
+            role: "tool",
+            functionResponses
+          });
+        } else {
+          finalAnswer = result.text;
+          break;
+        }
+      }
+
+      console.log(`[Agent Parser] Final raw response: "${finalAnswer}"`);
+
+      let cleanText = finalAnswer.trim();
+      if (cleanText.startsWith("```")) {
+        cleanText = cleanText.replace(/^```json\s*/i, "").replace(/```$/, "").trim();
+      }
+
+      const transaction = JSON.parse(cleanText);
+      sendJson(res, 200, {
+        success: true,
+        transaction,
+        steps: steps.map(s => ({
+          turn: s.turn,
+          calls: s.calls
+        }))
+      });
+
+    } catch (error) {
+      console.error("[Agent Parser] Error parsing request:", error);
+      sendJson(res, 500, { error: error.message || "Parsing failed." });
+    }
+    return;
+  }
+
   try {
     const body = await readBody(req);
     const userMessage = body.message || body.text;

@@ -6,6 +6,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "start:agent": "node agent-server.js"
+    "start:agent": "node agent-server.js",
+    "start:speech": "node speech-server.js"
   }
 }
