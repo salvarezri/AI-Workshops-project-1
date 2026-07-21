@@ -34,6 +34,12 @@ class GeminiProvider {
           parts: [{ text: msg.content }]
         };
       } else if (msg.role === "assistant") {
+        if (msg.parts) {
+          return {
+            role: "model",
+            parts: msg.parts
+          };
+        }
         const parts = [];
         if (msg.content) {
           parts.push({ text: msg.content });
@@ -47,11 +53,6 @@ class GeminiProvider {
               }
             });
           }
-        }
-        if (msg.thoughtSignature) {
-          parts.push({
-            thought_signature: msg.thoughtSignature
-          });
         }
         return {
           role: "model",
@@ -92,6 +93,8 @@ class GeminiProvider {
       }];
     }
 
+    console.log("[Gemini API Request Payload]:", JSON.stringify(payload, null, 2));
+
     const response = await fetch(url, {
       method: "POST",
       headers: {
@@ -106,13 +109,13 @@ class GeminiProvider {
     }
 
     const data = await response.json();
+    console.log("[Gemini API Raw Response Parts]:", JSON.stringify(data.candidates?.[0]?.content?.parts, null, 2));
     const candidate = data.candidates?.[0];
     const parts = candidate?.content?.parts || [];
 
     const functionCalls = [];
     let text = "";
 
-    let thoughtSignature = null;
     for (const part of parts) {
       if (part.functionCall) {
         functionCalls.push({
@@ -121,12 +124,10 @@ class GeminiProvider {
         });
       } else if (part.text) {
         text += part.text;
-      } else if (part.thought_signature) {
-        thoughtSignature = part.thought_signature;
       }
     }
 
-    return { text, functionCalls, thoughtSignature };
+    return { text, functionCalls, rawParts: parts };
   }
 }
 

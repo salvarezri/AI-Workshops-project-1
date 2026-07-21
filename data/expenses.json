@@ -14,58 +14,29 @@
     "updatedAt": "2026-07-21T02:09:47.056Z"
   },
   {
-    "id": "sample-expense-2",
-    "amount": 120,
-    "date": "2026-07-10",
-    "tags": [
-      "transport"
-    ],
-    "description": "Monthly transit pass",
-    "account": "Debit",
-    "verified": true,
-    "createdAt": "2026-07-10T09:00:00.000Z",
-    "updatedAt": "2026-07-10T09:00:00.000Z"
-  },
-  {
-    "id": "583d8c39-f5b4-4dff-b238-45abe9aa237c",
-    "amount": 250,
-    "date": "2026-07-19",
-    "tags": [
-      "music",
-      "suscriptions"
-    ],
-    "description": "payment of spotify",
-    "account": "credit card",
-    "verified": true,
-    "createdAt": "2026-07-19T19:41:32.183Z",
-    "updatedAt": "2026-07-21T02:09:51.343Z"
-  },
-  {
-    "id": "e3365038-5de1-4dc9-bb34-dd84931c143f",
-    "amount": 250.56,
+    "id": "2e7112d8-5149-4784-923f-66f0558344dc",
+    "amount": 5.29,
     "date": "2026-07-20",
     "tags": [
-      "food",
-      "personal"
+      "food"
     ],
-    "description": "Lunch at REST API Cafe",
+    "description": "Chocorramo",
     "account": "Cash",
-    "verified": true,
-    "createdAt": "2026-07-20T22:25:40.389Z",
-    "updatedAt": "2026-07-21T04:21:12.983Z"
+    "verified": false,
+    "createdAt": "2026-07-21T04:50:17.076Z",
+    "updatedAt": "2026-07-21T04:50:17.076Z"
   },
   {
-    "id": "bf8bdf22-f524-4b13-b166-ce2c54edbb1b",
-    "amount": 25.5,
-    "date": "2026-07-19",
+    "id": "fb93ee14-2385-4b23-aced-8b9b7595d1d9",
+    "amount": 1000,
+    "date": "2026-07-18",
     "tags": [
-      "food",
       "personal"
     ],
-    "description": "Lunch",
-    "account": "Credit card",
+    "description": "laptop",
+    "account": "credit card",
     "verified": false,
-    "createdAt": "2026-07-21T04:14:16.845Z",
-    "updatedAt": "2026-07-21T04:14:16.845Z"
+    "createdAt": "2026-07-21T04:56:17.101Z",
+    "updatedAt": "2026-07-21T04:56:17.101Z"
   }
 ]

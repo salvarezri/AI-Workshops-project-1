@@ -11,58 +11,5 @@
     "verified": true,
     "createdAt": "2026-07-01T08:00:00.000Z",
     "updatedAt": "2026-07-01T08:00:00.000Z"
-  },
-  {
-    "id": "sample-income-2",
-    "amount": 450,
-    "date": "2026-06-22",
-    "tags": [
-      "freelance",
-      "consulting"
-    ],
-    "description": "Workshop session",
-    "account": "Checking",
-    "verified": true,
-    "createdAt": "2026-06-22T18:00:00.000Z",
-    "updatedAt": "2026-06-22T18:00:00.000Z"
-  },
-  {
-    "id": "a1e0a830-0461-4d88-9a00-0fc15bf6dfef",
-    "amount": 1000,
-    "date": "2026-07-19",
-    "tags": [
-      "salary"
-    ],
-    "description": "office payment",
-    "account": "cash",
-    "verified": true,
-    "createdAt": "2026-07-19T19:47:44.327Z",
-    "updatedAt": "2026-07-19T19:47:44.327Z"
-  },
-  {
-    "id": "6e4fc628-bbe0-4f5c-8a1e-6e6b005dd5b0",
-    "amount": 1250,
-    "date": "2026-07-19",
-    "tags": [
-      "salary"
-    ],
-    "description": "Monthly Payroll + Bonus",
-    "account": "Checking",
-    "verified": true,
-    "createdAt": "2026-07-21T04:15:33.358Z",
-    "updatedAt": "2026-07-21T04:16:06.503Z"
-  },
-  {
-    "id": "4fcf5a0f-acaf-4110-a2d1-9a696b1e88cf",
-    "amount": 1200,
-    "date": "2026-07-19",
-    "tags": [
-      "salary"
-    ],
-    "description": "Payroll",
-    "account": "Checking",
-    "verified": true,
-    "createdAt": "2026-07-21T04:21:26.864Z",
-    "updatedAt": "2026-07-21T04:21:26.864Z"
   }
 ]

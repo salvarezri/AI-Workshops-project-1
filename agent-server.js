@@ -181,13 +181,11 @@ Keep conversation very brief and focused solely on executing the necessary tool 
       // Append assistant's thoughts/calls to history
       const assistantMessage = {
         role: "assistant",
-        content: result.text || null
+        content: result.text || null,
+        parts: result.rawParts
       };
       if (result.functionCalls && result.functionCalls.length > 0) {
         assistantMessage.functionCalls = result.functionCalls;
-      }
-      if (result.thoughtSignature) {
-        assistantMessage.thoughtSignature = result.thoughtSignature;
       }
       history.push(assistantMessage);
 
