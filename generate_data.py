@@ -146,7 +146,7 @@ def generate_financial_data(start_date, end_date, salary_amount, rent_amount):
                 "tags": ["groceries", "food"],
                 "description": "Weekly Groceries Shop",
                 "account": "Credit card",
-                "verified": random.choice([True, True, True, False]), # 75% verified
+                "verified": True,
                 "createdAt": iso_str,
                 "updatedAt": iso_str
             })
@@ -226,7 +226,7 @@ def generate_financial_data(start_date, end_date, salary_amount, rent_amount):
                         "tags": ["food", "dining"],
                         "description": desc,
                         "account": random.choice(["Credit card", "Cash"]),
-                        "verified": random.choice([True, True, False]),
+                        "verified": True,
                         "createdAt": iso_str,
                         "updatedAt": iso_str
                     })
@@ -241,7 +241,7 @@ def generate_financial_data(start_date, end_date, salary_amount, rent_amount):
                         "tags": tag,
                         "description": desc,
                         "account": "Credit card",
-                        "verified": random.choice([True, False]),
+                        "verified": True,
                         "createdAt": iso_str,
                         "updatedAt": iso_str
                     })
@@ -254,7 +254,7 @@ def generate_financial_data(start_date, end_date, salary_amount, rent_amount):
                         "tags": ["entertainment", "personal"],
                         "description": random.choice(["Cinema tickets & popcorn", "Concert entry fee", "Bowling alley game"]),
                         "account": "Credit card",
-                        "verified": random.choice([True, False]),
+                        "verified": True,
                         "createdAt": iso_str,
                         "updatedAt": iso_str
                     })

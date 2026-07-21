@@ -207,9 +207,13 @@ button:focus-visible {
 }
 
 .record-list {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 10px;
   margin-top: 16px;
+  max-height: 580px;
+  overflow-y: auto;
+  padding-right: 6px;
 }
 
 .record {
@@ -471,4 +475,36 @@ code {
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+
+/* Grouping Headers */
+.list-header-month {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-top: 18px;
+  margin-bottom: 8px;
+  padding-bottom: 4px;
+  border-bottom: 2px solid var(--line);
+}
+
+.list-header-week {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--dark);
+  margin-top: 14px;
+  margin-bottom: 6px;
+  padding-left: 8px;
+  border-left: 3px solid var(--primary);
+}
+
+.list-header-day {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--muted);
+  margin-top: 8px;
+  margin-bottom: 6px;
+  padding-left: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }

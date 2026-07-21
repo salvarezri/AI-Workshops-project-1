@@ -32,7 +32,6 @@ const els = {
   },
   expensesByTag: document.querySelector("#expenses-by-tag"),
   incomesByTag: document.querySelector("#incomes-by-tag"),
-  monthlyCashflow: document.querySelector("#monthly-cashflow"),
 };
 
 function setStatus(text) {
@@ -62,6 +61,7 @@ async function loadData() {
   state.expenses = expenses;
   state.incomes = incomes;
   state.reports = reports;
+  populateTagFilter();
   render();
   setStatus("Ready");
 }
@@ -71,9 +71,10 @@ function render() {
   renderExpenses();
   renderIncome();
   renderAuditIncomes();
-  renderBars(els.expensesByTag, state.reports.expensesByTag);
-  renderBars(els.incomesByTag, state.reports.incomesByTag);
-  renderCashflow();
+  renderExpensesByTag();
+  renderIncomesByTag();
+  renderCashflowChart();
+  renderPieChart();
 }
 
 function renderMetrics() {
@@ -83,6 +84,77 @@ function renderMetrics() {
   els.metrics.unverified.textContent = state.reports.totals.unverifiedExpenses;
 }
 
+function getStartOfWeek(dateStr) {
+  const date = new Date(dateStr + "T12:00:00");
+  const day = date.getDay();
+  const diff = date.getDate() - day + (day === 0 ? -6 : 1);
+  const monday = new Date(date.setDate(diff));
+  const y = monday.getFullYear();
+  const m = String(monday.getMonth() + 1).padStart(2, "0");
+  const d = String(monday.getDate()).padStart(2, "0");
+  return `${y}-${m}-${d}`;
+}
+
+function getTagStyle(tag) {
+  let hash = 0;
+  for (let i = 0; i < tag.length; i++) {
+    hash = tag.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  const h = Math.abs(hash) % 360;
+  return `background-color: hsl(${h}, 65%, 85%); color: hsl(${h}, 65%, 25%);`;
+}
+
+function renderGroupedList(items, rowRenderer, emptyMessage) {
+  if (!items.length) {
+    return `<div class="empty">${emptyMessage}</div>`;
+  }
+
+  // Sort descending by date
+  const sorted = [...items].sort((a, b) => b.date.localeCompare(a.date));
+
+  let lastMonth = "";
+  let lastWeek = "";
+  let lastDay = "";
+  let html = "";
+
+  for (const item of sorted) {
+    const dateStr = item.date;
+    const month = dateStr.slice(0, 7);
+    const week = getStartOfWeek(dateStr);
+    const day = dateStr;
+
+    if (month !== lastMonth) {
+      const d = new Date(dateStr + "T12:00:00");
+      const monthName = d.toLocaleDateString("en-US", { month: "long", year: "numeric" });
+      html += `<div class="list-header-month">📅 ${monthName}</div>`;
+      lastMonth = month;
+      lastWeek = "";
+      lastDay = "";
+    }
+
+    if (week !== lastWeek) {
+      const d = new Date(week + "T12:00:00");
+      const weekStartStr = d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+      const endOfWeek = new Date(d.setDate(d.getDate() + 6));
+      const weekEndStr = endOfWeek.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+      html += `<div class="list-header-week">🗓️ Week of ${weekStartStr} - ${weekEndStr}</div>`;
+      lastWeek = week;
+      lastDay = "";
+    }
+
+    if (day !== lastDay) {
+      const d = new Date(dateStr + "T12:00:00");
+      const dayName = d.toLocaleDateString("en-US", { weekday: "long", month: "short", day: "numeric" });
+      html += `<div class="list-header-day">📌 ${dayName}</div>`;
+      lastDay = day;
+    }
+
+    html += rowRenderer(item);
+  }
+
+  return html;
+}
+
 function renderExpenses() {
   const filtered = state.expenses.filter((expense) => {
     if (state.expenseFilter === "verified") return expense.verified;
@@ -90,12 +162,7 @@ function renderExpenses() {
     return true;
   });
 
-  if (!filtered.length) {
-    els.expenseList.innerHTML = `<div class="empty">No expenses match this view.</div>`;
-    return;
-  }
-
-  els.expenseList.innerHTML = filtered.map(renderExpenseRow).join("");
+  els.expenseList.innerHTML = renderGroupedList(filtered, renderExpenseRow, "No expenses match this view.");
 }
 
 function renderExpenseRow(expense) {
@@ -110,7 +177,7 @@ function renderExpenseRow(expense) {
           </span>
         </div>
         <div class="record-meta">${escapeHtml(expense.description || "No description")} ${expense.account ? `- ${escapeHtml(expense.account)}` : ""}</div>
-        <div class="tags">${expense.tags.map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("")}</div>
+        <div class="tags">${expense.tags.map((tag) => `<span class="tag" style="${getTagStyle(tag)}">${escapeHtml(tag)}</span>`).join("")}</div>
       </div>
       <div class="record-actions">
         <button class="verify-button" type="button" data-verify="${expense.id}" data-value="${!expense.verified}">
@@ -129,12 +196,7 @@ function renderAuditIncomes() {
     return true;
   });
 
-  if (!filtered.length) {
-    els.incomeAuditList.innerHTML = `<div class="empty">No incomes match this view.</div>`;
-    return;
-  }
-
-  els.incomeAuditList.innerHTML = filtered.map(renderIncomeRow).join("");
+  els.incomeAuditList.innerHTML = renderGroupedList(filtered, renderIncomeRow, "No incomes match this view.");
 }
 
 function renderIncomeRow(income) {
@@ -149,7 +211,7 @@ function renderIncomeRow(income) {
           </span>
         </div>
         <div class="record-meta">${escapeHtml(income.description || "No description")} ${income.account ? `- ${escapeHtml(income.account)}` : ""}</div>
-        <div class="tags">${income.tags.map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("")}</div>
+        <div class="tags">${income.tags.map((tag) => `<span class="tag" style="${getTagStyle(tag)}">${escapeHtml(tag)}</span>`).join("")}</div>
       </div>
       <div class="record-actions">
         <button class="verify-button" type="button" data-verify-income="${income.id}" data-value="${!income.verified}">
@@ -161,13 +223,8 @@ function renderIncomeRow(income) {
   `;
 }
 
-function renderIncome() {
-  if (!state.incomes.length) {
-    els.incomeList.innerHTML = `<div class="empty">No income recorded yet.</div>`;
-    return;
-  }
-
-  els.incomeList.innerHTML = state.incomes.map((income) => `
+function renderIncomeRowCompact(income) {
+  return `
     <article class="record compact-row">
       <div>
         <div class="record-title">
@@ -175,13 +232,17 @@ function renderIncome() {
           <span>${escapeHtml(income.date)}</span>
         </div>
         <div class="record-meta">${escapeHtml(income.description || "No description")} ${income.account ? `- ${escapeHtml(income.account)}` : ""}</div>
-        <div class="tags">${income.tags.map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("")}</div>
+        <div class="tags">${income.tags.map((tag) => `<span class="tag" style="${getTagStyle(tag)}">${escapeHtml(tag)}</span>`).join("")}</div>
       </div>
       <div class="record-actions">
         <button class="delete-button" type="button" aria-label="Delete income" data-delete-income="${income.id}">x</button>
       </div>
     </article>
-  `).join("");
+  `;
+}
+
+function renderIncome() {
+  els.incomeList.innerHTML = renderGroupedList(state.incomes, renderIncomeRowCompact, "No income recorded yet.");
 }
 
 function renderBars(container, rows) {
@@ -194,7 +255,7 @@ function renderBars(container, rows) {
   container.innerHTML = rows.map((row) => `
     <div class="bar-row">
       <div class="bar-label">
-        <span>${escapeHtml(row.tag)}</span>
+        <span class="tag" style="${getTagStyle(row.tag)}">${escapeHtml(row.tag)}</span>
         <strong>${money.format(row.total)}</strong>
       </div>
       <div class="bar-track"><div class="bar-fill" style="width: ${(row.total / max) * 100}%"></div></div>
@@ -202,26 +263,409 @@ function renderBars(container, rows) {
   `).join("");
 }
 
-function renderCashflow() {
-  const rows = state.reports.cashflowByMonth;
-  if (!rows.length) {
-    els.monthlyCashflow.innerHTML = `<div class="empty">No monthly data yet.</div>`;
+function renderExpensesByTag() {
+  const select = document.getElementById("expenses-tag-timeframe");
+  const timeframe = select ? select.value : "monthly";
+
+  const today = new Date();
+  let startDate = new Date();
+  
+  if (timeframe === "weekly") {
+    startDate = new Date(getStartOfWeek(today.toISOString().slice(0, 10)) + "T12:00:00");
+  } else if (timeframe === "monthly") {
+    startDate = new Date(today.getFullYear(), today.getMonth(), 1);
+  } else if (timeframe === "yearly") {
+    startDate = new Date(today.getFullYear(), 0, 1);
+  } else {
+    startDate = new Date(0);
+  }
+
+  const startDateStr = startDate.toISOString().slice(0, 10);
+
+  const tagTotals = {};
+  state.expenses.forEach(exp => {
+    if (exp.date >= startDateStr) {
+      exp.tags.forEach(tag => {
+        tagTotals[tag] = (tagTotals[tag] || 0) + exp.amount;
+      });
+    }
+  });
+
+  const rows = Object.keys(tagTotals)
+    .map(tag => ({ tag, total: tagTotals[tag] }))
+    .sort((a, b) => b.total - a.total);
+
+  renderBars(els.expensesByTag, rows);
+}
+
+function renderIncomesByTag() {
+  const select = document.getElementById("incomes-tag-timeframe");
+  const timeframe = select ? select.value : "monthly";
+
+  const today = new Date();
+  let startDate = new Date();
+  
+  if (timeframe === "weekly") {
+    startDate = new Date(getStartOfWeek(today.toISOString().slice(0, 10)) + "T12:00:00");
+  } else if (timeframe === "monthly") {
+    startDate = new Date(today.getFullYear(), today.getMonth(), 1);
+  } else if (timeframe === "yearly") {
+    startDate = new Date(today.getFullYear(), 0, 1);
+  } else {
+    startDate = new Date(0);
+  }
+
+  const startDateStr = startDate.toISOString().slice(0, 10);
+
+  const tagTotals = {};
+  state.incomes.forEach(inc => {
+    if (inc.date >= startDateStr) {
+      inc.tags.forEach(tag => {
+        tagTotals[tag] = (tagTotals[tag] || 0) + inc.amount;
+      });
+    }
+  });
+
+  const rows = Object.keys(tagTotals)
+    .map(tag => ({ tag, total: tagTotals[tag] }))
+    .sort((a, b) => b.total - a.total);
+
+  renderBars(els.incomesByTag, rows);
+}
+
+let cashflowChartInstance = null;
+let balanceChartInstance = null;
+let pieChartInstance = null;
+
+function populateTagFilter() {
+  const allTags = new Set();
+  state.expenses.forEach(exp => exp.tags.forEach(t => allTags.add(t)));
+  state.incomes.forEach(inc => inc.tags.forEach(t => allTags.add(t)));
+
+  const select = document.getElementById("cashflow-tag-filter");
+  if (!select) return;
+  const currentValue = select.value;
+
+  let html = `<option value="all">All Tags</option>`;
+  Array.from(allTags).sort().forEach(tag => {
+    html += `<option value="${escapeHtml(tag)}">${escapeHtml(tag)}</option>`;
+  });
+  select.innerHTML = html;
+
+  if (Array.from(allTags).includes(currentValue)) {
+    select.value = currentValue;
+  } else {
+    select.value = "all";
+  }
+}
+
+function renderCashflowChart() {
+  const canvas = document.getElementById("cashflow-chart");
+  if (!canvas) return;
+
+  const periodSelect = document.getElementById("cashflow-period");
+  const tagSelect = document.getElementById("cashflow-tag-filter");
+  const period = periodSelect ? periodSelect.value : "2";
+  const selectedTag = tagSelect ? tagSelect.value : "all";
+
+  const today = new Date();
+  let startDate = new Date();
+  
+  if (period === "all") {
+    let earliest = today.toISOString().slice(0, 10);
+    [...state.expenses, ...state.incomes].forEach(t => {
+      if (t.date < earliest) earliest = t.date;
+    });
+    startDate = new Date(earliest + "T12:00:00");
+  } else {
+    startDate.setMonth(today.getMonth() - parseInt(period));
+  }
+  const startDateStr = startDate.toISOString().slice(0, 10);
+
+  let interval = "month";
+  if (period === "1" || period === "2") {
+    interval = "day";
+  } else if (period === "3" || period === "6") {
+    interval = "week";
+  }
+
+  const labels = [];
+  const incomeData = [];
+  const expenseData = [];
+  const balanceData = [];
+
+  let runningBalance = 0;
+  state.incomes.forEach(inc => {
+    if (inc.date < startDateStr) runningBalance += inc.amount;
+  });
+  state.expenses.forEach(exp => {
+    if (exp.date < startDateStr) runningBalance -= exp.amount;
+  });
+
+  if (interval === "day") {
+    let curr = new Date(startDate);
+    while (curr <= today) {
+      const dateStr = curr.toISOString().slice(0, 10);
+      labels.push(dateStr);
+
+      const dayIncomes = state.incomes.filter(inc => inc.date === dateStr && (selectedTag === "all" || inc.tags.includes(selectedTag)));
+      const dayExpenses = state.expenses.filter(exp => exp.date === dateStr && (selectedTag === "all" || exp.tags.includes(selectedTag)));
+
+      const incSum = dayIncomes.reduce((s, x) => s + x.amount, 0);
+      const expSum = dayExpenses.reduce((s, x) => s + x.amount, 0);
+
+      incomeData.push(incSum);
+      expenseData.push(expSum);
+
+      const allDayIncomes = state.incomes.filter(inc => inc.date === dateStr);
+      const allDayExpenses = state.expenses.filter(exp => exp.date === dateStr);
+      runningBalance += allDayIncomes.reduce((s, x) => s + x.amount, 0) - allDayExpenses.reduce((s, x) => s + x.amount, 0);
+      balanceData.push(runningBalance);
+
+      curr.setDate(curr.getDate() + 1);
+    }
+  } else if (interval === "week") {
+    let curr = new Date(getStartOfWeek(startDateStr) + "T12:00:00");
+    while (curr <= today) {
+      const weekStartStr = curr.toISOString().slice(0, 10);
+      const weekEnd = new Date(curr);
+      weekEnd.setDate(weekEnd.getDate() + 6);
+      const weekEndStr = weekEnd.toISOString().slice(0, 10);
+
+      labels.push(`Week of ${weekStartStr.slice(5)}`);
+
+      const weekIncomes = state.incomes.filter(inc => inc.date >= weekStartStr && inc.date <= weekEndStr && (selectedTag === "all" || inc.tags.includes(selectedTag)));
+      const weekExpenses = state.expenses.filter(exp => exp.date >= weekStartStr && exp.date <= weekEndStr && (selectedTag === "all" || exp.tags.includes(selectedTag)));
+
+      const incSum = weekIncomes.reduce((s, x) => s + x.amount, 0);
+      const expSum = weekExpenses.reduce((s, x) => s + x.amount, 0);
+
+      incomeData.push(incSum);
+      expenseData.push(expSum);
+
+      const allWeekIncomes = state.incomes.filter(inc => inc.date >= weekStartStr && inc.date <= weekEndStr);
+      const allWeekExpenses = state.expenses.filter(exp => exp.date >= weekStartStr && exp.date <= weekEndStr);
+      runningBalance += allWeekIncomes.reduce((s, x) => s + x.amount, 0) - allWeekExpenses.reduce((s, x) => s + x.amount, 0);
+      balanceData.push(runningBalance);
+
+      curr.setDate(curr.getDate() + 7);
+    }
+  } else {
+    let curr = new Date(startDate.getFullYear(), startDate.getMonth(), 1);
+    while (curr <= today) {
+      const year = curr.getFullYear();
+      const month = String(curr.getMonth() + 1).padStart(2, "0");
+      const monthStr = `${year}-${month}`;
+
+      labels.push(monthStr);
+
+      const monthIncomes = state.incomes.filter(inc => inc.date.slice(0, 7) === monthStr && (selectedTag === "all" || inc.tags.includes(selectedTag)));
+      const monthExpenses = state.expenses.filter(exp => exp.date.slice(0, 7) === monthStr && (selectedTag === "all" || exp.tags.includes(selectedTag)));
+
+      const incSum = monthIncomes.reduce((s, x) => s + x.amount, 0);
+      const expSum = monthExpenses.reduce((s, x) => s + x.amount, 0);
+
+      incomeData.push(incSum);
+      expenseData.push(expSum);
+
+      const allMonthIncomes = state.incomes.filter(inc => inc.date.slice(0, 7) === monthStr);
+      const allMonthExpenses = state.expenses.filter(exp => exp.date.slice(0, 7) === monthStr);
+      runningBalance += allMonthIncomes.reduce((s, x) => s + x.amount, 0) - allMonthExpenses.reduce((s, x) => s + x.amount, 0);
+      balanceData.push(runningBalance);
+
+      curr.setMonth(curr.getMonth() + 1);
+    }
+  }
+
+  const ctx = canvas.getContext("2d");
+  if (cashflowChartInstance) {
+    cashflowChartInstance.destroy();
+  }
+
+  cashflowChartInstance = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: "Incomes",
+          data: incomeData,
+          borderColor: "#319795",
+          backgroundColor: "rgba(49, 151, 149, 0.05)",
+          tension: 0.1,
+          fill: false
+        },
+        {
+          label: "Expenses",
+          data: expenseData,
+          borderColor: "#e53e3e",
+          backgroundColor: "rgba(229, 62, 62, 0.05)",
+          tension: 0.1,
+          fill: false
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          ticks: {
+            callback: (v) => "$" + v.toLocaleString()
+          }
+        }
+      },
+      plugins: {
+        tooltip: {
+          callbacks: {
+            label: (ctx) => `${ctx.dataset.label}: $${ctx.raw.toFixed(2)}`
+          }
+        }
+      }
+    }
+  });
+
+  const canvasBalance = document.getElementById("balance-chart");
+  if (canvasBalance) {
+    const ctxBalance = canvasBalance.getContext("2d");
+    if (balanceChartInstance) {
+      balanceChartInstance.destroy();
+    }
+
+    balanceChartInstance = new Chart(ctxBalance, {
+      type: "line",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: "Running Balance",
+            data: balanceData,
+            borderColor: "#2d3748",
+            backgroundColor: "rgba(45, 55, 72, 0.05)",
+            tension: 0.1,
+            fill: false
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            ticks: {
+              callback: (v) => "$" + v.toLocaleString()
+            }
+          }
+        },
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: (ctx) => `${ctx.dataset.label}: $${ctx.raw.toFixed(2)}`
+            }
+          }
+        }
+      }
+    });
+  }
+}
+
+function renderPieChart() {
+  const canvas = document.getElementById("expenses-pie-chart");
+  if (!canvas) return;
+
+  const timeframeSelect = document.getElementById("pie-timeframe");
+  const timeframe = timeframeSelect ? timeframeSelect.value : "monthly";
+
+  const today = new Date();
+  let startDate = new Date();
+  
+  if (timeframe === "weekly") {
+    startDate = new Date(getStartOfWeek(today.toISOString().slice(0, 10)) + "T12:00:00");
+  } else if (timeframe === "monthly") {
+    startDate = new Date(today.getFullYear(), today.getMonth(), 1);
+  } else if (timeframe === "yearly") {
+    startDate = new Date(today.getFullYear(), 0, 1);
+  } else {
+    startDate = new Date(0);
+  }
+
+  const startDateStr = startDate.toISOString().slice(0, 10);
+
+  const tagTotals = {};
+  state.expenses.forEach(exp => {
+    if (exp.date >= startDateStr) {
+      exp.tags.forEach(tag => {
+        tagTotals[tag] = (tagTotals[tag] || 0) + exp.amount;
+      });
+    }
+  });
+
+  const labels = Object.keys(tagTotals).sort((a, b) => tagTotals[b] - tagTotals[a]);
+  const data = labels.map(tag => tagTotals[tag]);
+
+  const backgroundColors = [];
+  const borderColors = [];
+  labels.forEach(tag => {
+    let hash = 0;
+    for (let i = 0; i < tag.length; i++) {
+      hash = tag.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    const h = Math.abs(hash) % 360;
+    backgroundColors.push(`hsl(${h}, 65%, 80%)`);
+    borderColors.push(`hsl(${h}, 65%, 45%)`);
+  });
+
+  const ctx = canvas.getContext("2d");
+  if (pieChartInstance) {
+    pieChartInstance.destroy();
+  }
+
+  if (labels.length === 0) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.font = "14px sans-serif";
+    ctx.fillStyle = "#a0aec0";
+    ctx.textAlign = "center";
+    ctx.fillText("No expenses recorded for this timeframe.", canvas.width / 2, canvas.height / 2);
     return;
   }
 
-  els.monthlyCashflow.innerHTML = rows.map((row) => `
-    <div class="month-row">
-      <div class="month-label">
-        <strong>${escapeHtml(row.month)}</strong>
-        <span>Net ${money.format(row.net)}</span>
-      </div>
-      <div class="month-values">
-        <span>Income ${money.format(row.income)}</span>
-        <span>Expenses ${money.format(row.expenses)}</span>
-        <span>Net ${money.format(row.net)}</span>
-      </div>
-    </div>
-  `).join("");
+  pieChartInstance = new Chart(ctx, {
+    type: "pie",
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          data: data,
+          backgroundColor: backgroundColors,
+          borderColor: borderColors,
+          borderWidth: 1
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: "right",
+          labels: {
+            boxWidth: 12,
+            font: { size: 10 }
+          }
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const value = context.raw;
+              const total = context.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+              const percentage = ((value / total) * 100).toFixed(1);
+              return `${context.label}: $${value.toFixed(2)} (${percentage}%)`;
+            }
+          }
+        }
+      }
+    }
+  });
 }
 
 function setEntryType(type) {
@@ -493,4 +937,26 @@ if (aiEls.form) {
 }
 if (aiEls.micBtn) {
   aiEls.micBtn.addEventListener("click", toggleVoiceRecording);
+}
+
+// Bind chart filter changes
+const cashflowPeriodEl = document.getElementById("cashflow-period");
+if (cashflowPeriodEl) {
+  cashflowPeriodEl.addEventListener("change", renderCashflowChart);
+}
+const cashflowTagFilterEl = document.getElementById("cashflow-tag-filter");
+if (cashflowTagFilterEl) {
+  cashflowTagFilterEl.addEventListener("change", renderCashflowChart);
+}
+const pieTimeframeEl = document.getElementById("pie-timeframe");
+if (pieTimeframeEl) {
+  pieTimeframeEl.addEventListener("change", renderPieChart);
+}
+const expensesTagTimeframeEl = document.getElementById("expenses-tag-timeframe");
+if (expensesTagTimeframeEl) {
+  expensesTagTimeframeEl.addEventListener("change", renderExpensesByTag);
+}
+const incomesTagTimeframeEl = document.getElementById("incomes-tag-timeframe");
+if (incomesTagTimeframeEl) {
+  incomesTagTimeframeEl.addEventListener("change", renderIncomesByTag);
 }
