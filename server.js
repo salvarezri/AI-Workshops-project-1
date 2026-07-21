@@ -84,7 +84,7 @@ function validateEntry(payload, type) {
       tags,
       description,
       account,
-      verified: type === "expenses" ? Boolean(payload.verified) : true,
+      verified: Boolean(payload.verified),
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     },

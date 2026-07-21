@@ -89,7 +89,8 @@
         </div>
       </div>
 
-      <div class="panel list-panel">
+      <div class="audit-column">
+        <div class="panel list-panel">
           <div class="section-header">
             <div>
               <p class="eyebrow">Verify and audit</p>
@@ -103,7 +104,23 @@
           </div>
           <div class="record-list" id="expense-list"></div>
         </div>
-      </section>
+
+        <div class="panel list-panel">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">Verify and audit</p>
+              <h2>Incomes</h2>
+            </div>
+            <select id="income-filter" aria-label="Filter incomes">
+              <option value="all">All incomes</option>
+              <option value="unverified">Unverified only</option>
+              <option value="verified">Verified only</option>
+            </select>
+          </div>
+          <div class="record-list" id="income-audit-list"></div>
+        </div>
+      </div>
+    </section>
 
       <section class="reports">
         <div class="section-header">

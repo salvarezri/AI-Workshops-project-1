@@ -38,5 +38,18 @@
     "verified": false,
     "createdAt": "2026-07-21T04:56:17.101Z",
     "updatedAt": "2026-07-21T04:56:17.101Z"
+  },
+  {
+    "id": "d1f83a9d-eab3-472e-9f77-6bfdbde80924",
+    "amount": 2000000,
+    "date": "2026-04-22",
+    "tags": [
+      "personal"
+    ],
+    "description": "Sent money to friend in New Jersey",
+    "account": "unknown",
+    "verified": false,
+    "createdAt": "2026-07-21T06:55:48.455Z",
+    "updatedAt": "2026-07-21T06:55:48.455Z"
   }
 ]

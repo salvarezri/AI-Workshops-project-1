@@ -465,3 +465,10 @@ code {
   font-style: italic;
   min-height: 18px;
 }
+
+/* Audit Column Layout */
+.audit-column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

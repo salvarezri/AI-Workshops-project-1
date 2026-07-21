@@ -4,6 +4,7 @@ const state = {
   reports: null,
   entryType: "expenses",
   expenseFilter: "all",
+  incomeFilter: "all",
 };
 
 const money = new Intl.NumberFormat("en-US", {
@@ -21,6 +22,8 @@ const els = {
   expenseFilter: document.querySelector("#expense-filter"),
   expenseList: document.querySelector("#expense-list"),
   incomeList: document.querySelector("#income-list"),
+  incomeFilter: document.querySelector("#income-filter"),
+  incomeAuditList: document.querySelector("#income-audit-list"),
   metrics: {
     income: document.querySelector("#metric-income"),
     expenses: document.querySelector("#metric-expenses"),
@@ -67,6 +70,7 @@ function render() {
   renderMetrics();
   renderExpenses();
   renderIncome();
+  renderAuditIncomes();
   renderBars(els.expensesByTag, state.reports.expensesByTag);
   renderBars(els.incomesByTag, state.reports.incomesByTag);
   renderCashflow();
@@ -113,6 +117,45 @@ function renderExpenseRow(expense) {
           ${expense.verified ? "Unverify" : "Verify"}
         </button>
         <button class="delete-button" type="button" aria-label="Delete expense" data-delete-expense="${expense.id}">x</button>
+      </div>
+    </article>
+  `;
+}
+
+function renderAuditIncomes() {
+  const filtered = state.incomes.filter((income) => {
+    if (state.incomeFilter === "verified") return income.verified;
+    if (state.incomeFilter === "unverified") return !income.verified;
+    return true;
+  });
+
+  if (!filtered.length) {
+    els.incomeAuditList.innerHTML = `<div class="empty">No incomes match this view.</div>`;
+    return;
+  }
+
+  els.incomeAuditList.innerHTML = filtered.map(renderIncomeRow).join("");
+}
+
+function renderIncomeRow(income) {
+  return `
+    <article class="record">
+      <div>
+        <div class="record-title">
+          <strong>${money.format(income.amount)}</strong>
+          <span>${escapeHtml(income.date)}</span>
+          <span class="${income.verified ? "verified" : "unverified"}">
+            ${income.verified ? "Verified" : "Needs verification"}
+          </span>
+        </div>
+        <div class="record-meta">${escapeHtml(income.description || "No description")} ${income.account ? `- ${escapeHtml(income.account)}` : ""}</div>
+        <div class="tags">${income.tags.map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("")}</div>
+      </div>
+      <div class="record-actions">
+        <button class="verify-button" type="button" data-verify-income="${income.id}" data-value="${!income.verified}">
+          ${income.verified ? "Unverify" : "Verify"}
+        </button>
+        <button class="delete-button" type="button" aria-label="Delete income" data-delete-income="${income.id}">x</button>
       </div>
     </article>
   `;
@@ -185,7 +228,13 @@ function setEntryType(type) {
   state.entryType = type;
   els.typeInput.value = type;
   els.submitButton.textContent = type === "expenses" ? "Add expense" : "Add income";
-  els.verifiedRow.style.display = type === "expenses" ? "grid" : "none";
+  
+  // Show verify checkbox for both expenses and incomes
+  els.verifiedRow.style.display = "grid";
+  const checkbox = els.verifiedRow.querySelector("input[name='verified']");
+  if (checkbox && checkbox.nextSibling) {
+    checkbox.nextSibling.textContent = type === "expenses" ? " Mark expense as already verified" : " Mark income as already verified";
+  }
 
   els.tabs.forEach((tab) => {
     tab.classList.toggle("active", tab.dataset.entryType === type);
@@ -221,6 +270,7 @@ async function submitEntry(event) {
 
 async function handleListClick(event) {
   const verifyButton = event.target.closest("[data-verify]");
+  const verifyIncomeButton = event.target.closest("[data-verify-income]");
   const deleteExpenseButton = event.target.closest("[data-delete-expense]");
   const deleteIncomeButton = event.target.closest("[data-delete-income]");
 
@@ -230,6 +280,15 @@ async function handleListClick(event) {
       await api(`/api/expenses/${verifyButton.dataset.verify}`, {
         method: "PATCH",
         body: JSON.stringify({ verified: verifyButton.dataset.value === "true" }),
+      });
+      await loadData();
+    }
+
+    if (verifyIncomeButton) {
+      setStatus("Saving");
+      await api(`/api/incomes/${verifyIncomeButton.dataset.verifyIncome}`, {
+        method: "PATCH",
+        body: JSON.stringify({ verified: verifyIncomeButton.dataset.value === "true" }),
       });
       await loadData();
     }
@@ -268,8 +327,13 @@ els.expenseFilter.addEventListener("change", (event) => {
   state.expenseFilter = event.target.value;
   renderExpenses();
 });
+els.incomeFilter.addEventListener("change", (event) => {
+  state.incomeFilter = event.target.value;
+  renderAuditIncomes();
+});
 els.expenseList.addEventListener("click", handleListClick);
 els.incomeList.addEventListener("click", handleListClick);
+els.incomeAuditList.addEventListener("click", handleListClick);
 
 els.form.elements.date.value = new Date().toISOString().slice(0, 10);
 setEntryType("expenses");

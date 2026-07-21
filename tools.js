@@ -31,7 +31,8 @@ const toolDeclarations = [
         date: { type: "STRING", description: "The date of the income in YYYY-MM-DD format." },
         tags: { type: "ARRAY", items: { type: "STRING" }, description: "Tags for categorization (e.g. salary, freelance, refund)." },
         description: { type: "STRING", description: "A description of the income." },
-        account: { type: "STRING", description: "Account where the income was deposited (e.g. Checking, Savings, Cash)." }
+        account: { type: "STRING", description: "Account where the income was deposited (e.g. Checking, Savings, Cash)." },
+        verified: { type: "BOOLEAN", description: "Whether the income is already verified. Default is false." }
       },
       required: ["amount", "date", "tags", "description", "account"]
     }
@@ -168,11 +169,11 @@ async function executeTool(name, args) {
       }
 
       case "createIncome": {
-        const { amount, date, tags, description, account } = args;
+        const { amount, date, tags, description, account, verified } = args;
         const res = await fetch(`${TRACKER_API_URL}/api/incomes`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ amount, date, tags, description, account })
+          body: JSON.stringify({ amount, date, tags, description, account, verified: Boolean(verified) })
         });
         if (!res.ok) {
           const text = await res.text();
