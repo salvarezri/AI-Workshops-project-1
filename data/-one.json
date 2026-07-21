@@ -1,0 +1,55 @@
+[
+  {
+    "id": "sample-expense-1",
+    "amount": 42.75,
+    "date": "2026-07-16",
+    "tags": [
+      "food",
+      "personal"
+    ],
+    "description": "Team lunch",
+    "account": "Credit card",
+    "verified": true,
+    "createdAt": "2026-07-16T12:00:00.000Z",
+    "updatedAt": "2026-07-21T02:09:47.056Z"
+  },
+  {
+    "id": "2e7112d8-5149-4784-923f-66f0558344dc",
+    "amount": 5.29,
+    "date": "2026-07-20",
+    "tags": [
+      "food"
+    ],
+    "description": "Chocorramo",
+    "account": "Cash",
+    "verified": false,
+    "createdAt": "2026-07-21T04:50:17.076Z",
+    "updatedAt": "2026-07-21T04:50:17.076Z"
+  },
+  {
+    "id": "fb93ee14-2385-4b23-aced-8b9b7595d1d9",
+    "amount": 1000,
+    "date": "2026-07-18",
+    "tags": [
+      "personal"
+    ],
+    "description": "laptop",
+    "account": "credit card",
+    "verified": false,
+    "createdAt": "2026-07-21T04:56:17.101Z",
+    "updatedAt": "2026-07-21T04:56:17.101Z"
+  },
+  {
+    "id": "d1f83a9d-eab3-472e-9f77-6bfdbde80924",
+    "amount": 2000000,
+    "date": "2026-04-22",
+    "tags": [
+      "personal"
+    ],
+    "description": "Sent money to friend in New Jersey",
+    "account": "unknown",
+    "verified": false,
+    "createdAt": "2026-07-21T06:55:48.455Z",
+    "updatedAt": "2026-07-21T06:55:48.455Z"
+  }
+]

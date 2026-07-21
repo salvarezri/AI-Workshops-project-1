@@ -1,0 +1,56 @@
+[
+  {
+    "id": "sample-income-1",
+    "amount": 3200,
+    "date": "2026-07-01",
+    "tags": [
+      "salary"
+    ],
+    "description": "Monthly salary",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2026-07-01T08:00:00.000Z",
+    "updatedAt": "2026-07-01T08:00:00.000Z"
+  },
+  {
+    "id": "47f6ca2f-b7db-45ff-99c5-7159c87484b2",
+    "amount": 5,
+    "date": "2026-07-18",
+    "tags": [
+      "personal",
+      "loan repayment"
+    ],
+    "description": "loan repayment from mom",
+    "account": "cash",
+    "verified": true,
+    "createdAt": "2026-07-21T06:31:24.510Z",
+    "updatedAt": "2026-07-21T06:31:24.510Z"
+  },
+  {
+    "id": "54fe69fb-4f07-489a-94b9-da8e100f734e",
+    "amount": 200,
+    "date": "2026-06-21",
+    "tags": [
+      "personal",
+      "refund"
+    ],
+    "description": "Refund for laptop",
+    "account": "unknown",
+    "verified": true,
+    "createdAt": "2026-07-21T06:33:13.294Z",
+    "updatedAt": "2026-07-21T06:55:05.258Z"
+  },
+  {
+    "id": "5465cd4b-9e7b-4cd5-9fed-bb2b3870ee9d",
+    "amount": 2000000,
+    "date": "2026-07-22",
+    "tags": [
+      "personal"
+    ],
+    "description": "Lottery ticket redemption",
+    "account": "unknown",
+    "verified": true,
+    "createdAt": "2026-07-21T06:58:34.428Z",
+    "updatedAt": "2026-07-21T06:58:44.039Z"
+  }
+]

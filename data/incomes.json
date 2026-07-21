@@ -1,56 +1,890 @@
 [
   {
-    "id": "sample-income-1",
-    "amount": 3200,
-    "date": "2026-07-01",
+    "id": "86084405-f78a-4d6d-ada8-0f3136d64862",
+    "amount": 3200.0,
+    "date": "2023-08-01",
     "tags": [
       "salary"
     ],
-    "description": "Monthly salary",
+    "description": "Acme Corp Monthly Salary",
     "account": "Checking",
     "verified": true,
-    "createdAt": "2026-07-01T08:00:00.000Z",
-    "updatedAt": "2026-07-01T08:00:00.000Z"
+    "createdAt": "2023-08-01T12:00:00.000Z",
+    "updatedAt": "2023-08-01T12:00:00.000Z"
   },
   {
-    "id": "47f6ca2f-b7db-45ff-99c5-7159c87484b2",
-    "amount": 5,
-    "date": "2026-07-18",
+    "id": "cea2e799-a24c-4d2f-972e-dccd2991b0fb",
+    "amount": 3200.0,
+    "date": "2023-09-01",
     "tags": [
-      "personal",
-      "loan repayment"
+      "salary"
     ],
-    "description": "loan repayment from mom",
-    "account": "cash",
+    "description": "Acme Corp Monthly Salary",
+    "account": "Checking",
     "verified": true,
-    "createdAt": "2026-07-21T06:31:24.510Z",
-    "updatedAt": "2026-07-21T06:31:24.510Z"
+    "createdAt": "2023-09-01T12:00:00.000Z",
+    "updatedAt": "2023-09-01T12:00:00.000Z"
   },
   {
-    "id": "54fe69fb-4f07-489a-94b9-da8e100f734e",
-    "amount": 200,
-    "date": "2026-06-21",
+    "id": "050a363e-fdfe-45f9-b408-dc1eb40851c1",
+    "amount": 600.0,
+    "date": "2023-09-22",
+    "tags": [
+      "freelance",
+      "work"
+    ],
+    "description": "Freelance consulting services",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2023-09-22T12:00:00.000Z",
+    "updatedAt": "2023-09-22T12:00:00.000Z"
+  },
+  {
+    "id": "eabaa757-34d9-4c7f-9a31-8dd2768ee04c",
+    "amount": 71.55,
+    "date": "2023-09-26",
     "tags": [
       "personal",
       "refund"
     ],
-    "description": "Refund for laptop",
-    "account": "unknown",
+    "description": "Online store refund",
+    "account": "Credit card",
     "verified": true,
-    "createdAt": "2026-07-21T06:33:13.294Z",
-    "updatedAt": "2026-07-21T06:55:05.258Z"
+    "createdAt": "2023-09-26T12:00:00.000Z",
+    "updatedAt": "2023-09-26T12:00:00.000Z"
   },
   {
-    "id": "5465cd4b-9e7b-4cd5-9fed-bb2b3870ee9d",
-    "amount": 2000000,
-    "date": "2026-07-22",
+    "id": "56192b94-58ce-4dc0-8297-2b1f8c8de71b",
+    "amount": 3200.0,
+    "date": "2023-10-01",
     "tags": [
-      "personal"
+      "salary"
     ],
-    "description": "Lottery ticket redemption",
-    "account": "unknown",
+    "description": "Acme Corp Monthly Salary",
+    "account": "Checking",
     "verified": true,
-    "createdAt": "2026-07-21T06:58:34.428Z",
-    "updatedAt": "2026-07-21T06:58:44.039Z"
+    "createdAt": "2023-10-01T12:00:00.000Z",
+    "updatedAt": "2023-10-01T12:00:00.000Z"
+  },
+  {
+    "id": "00060673-3689-4fe2-9846-2d02fd072d4d",
+    "amount": 300.0,
+    "date": "2023-10-13",
+    "tags": [
+      "freelance",
+      "work"
+    ],
+    "description": "Freelance consulting services",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2023-10-13T12:00:00.000Z",
+    "updatedAt": "2023-10-13T12:00:00.000Z"
+  },
+  {
+    "id": "6cfea852-9852-442b-a3bd-f8a2354ad7c7",
+    "amount": 3200.0,
+    "date": "2023-11-01",
+    "tags": [
+      "salary"
+    ],
+    "description": "Acme Corp Monthly Salary",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2023-11-01T12:00:00.000Z",
+    "updatedAt": "2023-11-01T12:00:00.000Z"
+  },
+  {
+    "id": "dc38c205-272c-4792-aac4-65eb2400a7f7",
+    "amount": 600.0,
+    "date": "2023-11-10",
+    "tags": [
+      "freelance",
+      "work"
+    ],
+    "description": "Freelance consulting services",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2023-11-10T12:00:00.000Z",
+    "updatedAt": "2023-11-10T12:00:00.000Z"
+  },
+  {
+    "id": "6f5610b6-558d-49ff-8232-5037139b6d20",
+    "amount": 300.0,
+    "date": "2023-11-24",
+    "tags": [
+      "freelance",
+      "work"
+    ],
+    "description": "Freelance consulting services",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2023-11-24T12:00:00.000Z",
+    "updatedAt": "2023-11-24T12:00:00.000Z"
+  },
+  {
+    "id": "6141018b-876c-470c-8222-5135c5989b40",
+    "amount": 3200.0,
+    "date": "2023-12-01",
+    "tags": [
+      "salary"
+    ],
+    "description": "Acme Corp Monthly Salary",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2023-12-01T12:00:00.000Z",
+    "updatedAt": "2023-12-01T12:00:00.000Z"
+  },
+  {
+    "id": "adb71ec9-7743-448b-9819-87d71fc0410f",
+    "amount": 81.7,
+    "date": "2023-12-12",
+    "tags": [
+      "personal",
+      "refund"
+    ],
+    "description": "Online store refund",
+    "account": "Credit card",
+    "verified": true,
+    "createdAt": "2023-12-12T12:00:00.000Z",
+    "updatedAt": "2023-12-12T12:00:00.000Z"
+  },
+  {
+    "id": "1299b143-d216-4854-98f2-d73b639876c0",
+    "amount": 3200.0,
+    "date": "2024-01-01",
+    "tags": [
+      "salary"
+    ],
+    "description": "Acme Corp Monthly Salary",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2024-01-01T12:00:00.000Z",
+    "updatedAt": "2024-01-01T12:00:00.000Z"
+  },
+  {
+    "id": "83683895-8ef8-46d1-981d-99982357388d",
+    "amount": 3200.0,
+    "date": "2024-02-01",
+    "tags": [
+      "salary"
+    ],
+    "description": "Acme Corp Monthly Salary",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2024-02-01T12:00:00.000Z",
+    "updatedAt": "2024-02-01T12:00:00.000Z"
+  },
+  {
+    "id": "b48c23db-e1c1-473d-9873-3b52aab36386",
+    "amount": 600.0,
+    "date": "2024-02-09",
+    "tags": [
+      "freelance",
+      "work"
+    ],
+    "description": "Freelance consulting services",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2024-02-09T12:00:00.000Z",
+    "updatedAt": "2024-02-09T12:00:00.000Z"
+  },
+  {
+    "id": "fa83cc56-9282-45ae-ae5f-79fc1d9ee8df",
+    "amount": 3200.0,
+    "date": "2024-03-01",
+    "tags": [
+      "salary"
+    ],
+    "description": "Acme Corp Monthly Salary",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2024-03-01T12:00:00.000Z",
+    "updatedAt": "2024-03-01T12:00:00.000Z"
+  },
+  {
+    "id": "fd0621c3-0fa6-42c4-bf3f-84b8fea18e2c",
+    "amount": 450.0,
+    "date": "2024-03-29",
+    "tags": [
+      "freelance",
+      "work"
+    ],
+    "description": "Freelance consulting services",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2024-03-29T12:00:00.000Z",
+    "updatedAt": "2024-03-29T12:00:00.000Z"
+  },
+  {
+    "id": "8e180c27-ad84-4e8e-9e65-e7e0178d7ef6",
+    "amount": 3200.0,
+    "date": "2024-04-01",
+    "tags": [
+      "salary"
+    ],
+    "description": "Acme Corp Monthly Salary",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2024-04-01T12:00:00.000Z",
+    "updatedAt": "2024-04-01T12:00:00.000Z"
+  },
+  {
+    "id": "77313b62-f1b3-44f8-abbb-d68a4398b263",
+    "amount": 250.0,
+    "date": "2024-04-12",
+    "tags": [
+      "freelance",
+      "work"
+    ],
+    "description": "Freelance consulting services",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2024-04-12T12:00:00.000Z",
+    "updatedAt": "2024-04-12T12:00:00.000Z"
+  },
+  {
+    "id": "997f3e65-8e49-450b-9fb4-a3d883d470e6",
+    "amount": 3200.0,
+    "date": "2024-05-01",
+    "tags": [
+      "salary"
+    ],
+    "description": "Acme Corp Monthly Salary",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2024-05-01T12:00:00.000Z",
+    "updatedAt": "2024-05-01T12:00:00.000Z"
+  },
+  {
+    "id": "02c9cc70-b6c5-4a97-8901-62a836326658",
+    "amount": 37.78,
+    "date": "2024-05-08",
+    "tags": [
+      "personal",
+      "refund"
+    ],
+    "description": "Online store refund",
+    "account": "Credit card",
+    "verified": true,
+    "createdAt": "2024-05-08T12:00:00.000Z",
+    "updatedAt": "2024-05-08T12:00:00.000Z"
+  },
+  {
+    "id": "af07911a-144f-429d-94d0-13cd2444cc9e",
+    "amount": 31.75,
+    "date": "2024-05-29",
+    "tags": [
+      "personal",
+      "refund"
+    ],
+    "description": "Online store refund",
+    "account": "Credit card",
+    "verified": true,
+    "createdAt": "2024-05-29T12:00:00.000Z",
+    "updatedAt": "2024-05-29T12:00:00.000Z"
+  },
+  {
+    "id": "eed68234-e99f-4da9-b25d-4b41ce79b12e",
+    "amount": 250.0,
+    "date": "2024-05-31",
+    "tags": [
+      "freelance",
+      "work"
+    ],
+    "description": "Freelance consulting services",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2024-05-31T12:00:00.000Z",
+    "updatedAt": "2024-05-31T12:00:00.000Z"
+  },
+  {
+    "id": "f72617c7-bce0-4b7b-96d7-a95f62fa1146",
+    "amount": 3200.0,
+    "date": "2024-06-01",
+    "tags": [
+      "salary"
+    ],
+    "description": "Acme Corp Monthly Salary",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2024-06-01T12:00:00.000Z",
+    "updatedAt": "2024-06-01T12:00:00.000Z"
+  },
+  {
+    "id": "add47793-ecc8-439b-8ff2-478bf5d33146",
+    "amount": 450.0,
+    "date": "2024-06-28",
+    "tags": [
+      "freelance",
+      "work"
+    ],
+    "description": "Freelance consulting services",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2024-06-28T12:00:00.000Z",
+    "updatedAt": "2024-06-28T12:00:00.000Z"
+  },
+  {
+    "id": "f847b551-0d96-40b6-b272-e075d483070e",
+    "amount": 24.71,
+    "date": "2024-06-29",
+    "tags": [
+      "personal",
+      "refund"
+    ],
+    "description": "Online store refund",
+    "account": "Credit card",
+    "verified": true,
+    "createdAt": "2024-06-29T12:00:00.000Z",
+    "updatedAt": "2024-06-29T12:00:00.000Z"
+  },
+  {
+    "id": "7eb7d147-23e0-418b-ae72-afe3578cd8ef",
+    "amount": 64.03,
+    "date": "2024-06-30",
+    "tags": [
+      "personal",
+      "refund"
+    ],
+    "description": "Online store refund",
+    "account": "Credit card",
+    "verified": true,
+    "createdAt": "2024-06-30T12:00:00.000Z",
+    "updatedAt": "2024-06-30T12:00:00.000Z"
+  },
+  {
+    "id": "6061150d-ec8a-4da6-80f2-6a91c430b906",
+    "amount": 3200.0,
+    "date": "2024-07-01",
+    "tags": [
+      "salary"
+    ],
+    "description": "Acme Corp Monthly Salary",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2024-07-01T12:00:00.000Z",
+    "updatedAt": "2024-07-01T12:00:00.000Z"
+  },
+  {
+    "id": "8463a915-ed98-4682-84b5-aafa4d68fce0",
+    "amount": 60.73,
+    "date": "2024-07-16",
+    "tags": [
+      "personal",
+      "refund"
+    ],
+    "description": "Online store refund",
+    "account": "Credit card",
+    "verified": true,
+    "createdAt": "2024-07-16T12:00:00.000Z",
+    "updatedAt": "2024-07-16T12:00:00.000Z"
+  },
+  {
+    "id": "88590f4b-fa0c-48d6-9d43-82c8fdd2675a",
+    "amount": 450.0,
+    "date": "2024-07-26",
+    "tags": [
+      "freelance",
+      "work"
+    ],
+    "description": "Freelance consulting services",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2024-07-26T12:00:00.000Z",
+    "updatedAt": "2024-07-26T12:00:00.000Z"
+  },
+  {
+    "id": "b4e6ee4e-c907-4f1d-8c33-7c82f0448fc0",
+    "amount": 3200.0,
+    "date": "2024-08-01",
+    "tags": [
+      "salary"
+    ],
+    "description": "Acme Corp Monthly Salary",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2024-08-01T12:00:00.000Z",
+    "updatedAt": "2024-08-01T12:00:00.000Z"
+  },
+  {
+    "id": "1f6dc39a-7347-4582-b71e-8c64eb89c0c4",
+    "amount": 3200.0,
+    "date": "2024-09-01",
+    "tags": [
+      "salary"
+    ],
+    "description": "Acme Corp Monthly Salary",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2024-09-01T12:00:00.000Z",
+    "updatedAt": "2024-09-01T12:00:00.000Z"
+  },
+  {
+    "id": "484b91c2-c812-4260-b02e-b9d4069c47e0",
+    "amount": 19.05,
+    "date": "2024-09-15",
+    "tags": [
+      "personal",
+      "refund"
+    ],
+    "description": "Online store refund",
+    "account": "Credit card",
+    "verified": true,
+    "createdAt": "2024-09-15T12:00:00.000Z",
+    "updatedAt": "2024-09-15T12:00:00.000Z"
+  },
+  {
+    "id": "e525c396-799a-416f-b6e8-05efafcfc43f",
+    "amount": 3200.0,
+    "date": "2024-10-01",
+    "tags": [
+      "salary"
+    ],
+    "description": "Acme Corp Monthly Salary",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2024-10-01T12:00:00.000Z",
+    "updatedAt": "2024-10-01T12:00:00.000Z"
+  },
+  {
+    "id": "fde0a174-c11f-4a21-90d4-5be3bb1691af",
+    "amount": 3200.0,
+    "date": "2024-11-01",
+    "tags": [
+      "salary"
+    ],
+    "description": "Acme Corp Monthly Salary",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2024-11-01T12:00:00.000Z",
+    "updatedAt": "2024-11-01T12:00:00.000Z"
+  },
+  {
+    "id": "98ac49d6-bde7-424c-a689-13bf1a341a8d",
+    "amount": 78.86,
+    "date": "2024-11-30",
+    "tags": [
+      "personal",
+      "refund"
+    ],
+    "description": "Online store refund",
+    "account": "Credit card",
+    "verified": true,
+    "createdAt": "2024-11-30T12:00:00.000Z",
+    "updatedAt": "2024-11-30T12:00:00.000Z"
+  },
+  {
+    "id": "c0dd934f-606a-44dd-a02c-dc2dc8418dc3",
+    "amount": 3200.0,
+    "date": "2024-12-01",
+    "tags": [
+      "salary"
+    ],
+    "description": "Acme Corp Monthly Salary",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2024-12-01T12:00:00.000Z",
+    "updatedAt": "2024-12-01T12:00:00.000Z"
+  },
+  {
+    "id": "e7fff3bd-d624-4d5f-9b90-2a14533a7a0e",
+    "amount": 3200.0,
+    "date": "2025-01-01",
+    "tags": [
+      "salary"
+    ],
+    "description": "Acme Corp Monthly Salary",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2025-01-01T12:00:00.000Z",
+    "updatedAt": "2025-01-01T12:00:00.000Z"
+  },
+  {
+    "id": "d6f1b417-6e35-40ae-b948-6ec4bced7f64",
+    "amount": 3200.0,
+    "date": "2025-02-01",
+    "tags": [
+      "salary"
+    ],
+    "description": "Acme Corp Monthly Salary",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2025-02-01T12:00:00.000Z",
+    "updatedAt": "2025-02-01T12:00:00.000Z"
+  },
+  {
+    "id": "59abc91b-3fbd-4163-a5c1-2a8e5236b93c",
+    "amount": 3200.0,
+    "date": "2025-03-01",
+    "tags": [
+      "salary"
+    ],
+    "description": "Acme Corp Monthly Salary",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2025-03-01T12:00:00.000Z",
+    "updatedAt": "2025-03-01T12:00:00.000Z"
+  },
+  {
+    "id": "b558645a-7fc2-4503-a0ff-ced9e4a8d92a",
+    "amount": 450.0,
+    "date": "2025-03-14",
+    "tags": [
+      "freelance",
+      "work"
+    ],
+    "description": "Freelance consulting services",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2025-03-14T12:00:00.000Z",
+    "updatedAt": "2025-03-14T12:00:00.000Z"
+  },
+  {
+    "id": "4f664b8b-e0bb-486f-8ab5-f0d7429e38ae",
+    "amount": 3200.0,
+    "date": "2025-04-01",
+    "tags": [
+      "salary"
+    ],
+    "description": "Acme Corp Monthly Salary",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2025-04-01T12:00:00.000Z",
+    "updatedAt": "2025-04-01T12:00:00.000Z"
+  },
+  {
+    "id": "6db042a4-44fa-4a41-90f2-e018509cf8f4",
+    "amount": 53.46,
+    "date": "2025-04-24",
+    "tags": [
+      "personal",
+      "refund"
+    ],
+    "description": "Online store refund",
+    "account": "Credit card",
+    "verified": true,
+    "createdAt": "2025-04-24T12:00:00.000Z",
+    "updatedAt": "2025-04-24T12:00:00.000Z"
+  },
+  {
+    "id": "91ead0be-7b09-4715-b9e4-24bdf4ee9a98",
+    "amount": 3200.0,
+    "date": "2025-05-01",
+    "tags": [
+      "salary"
+    ],
+    "description": "Acme Corp Monthly Salary",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2025-05-01T12:00:00.000Z",
+    "updatedAt": "2025-05-01T12:00:00.000Z"
+  },
+  {
+    "id": "24363ca3-b5b1-4ab2-ae1c-61a046d05c50",
+    "amount": 3200.0,
+    "date": "2025-06-01",
+    "tags": [
+      "salary"
+    ],
+    "description": "Acme Corp Monthly Salary",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2025-06-01T12:00:00.000Z",
+    "updatedAt": "2025-06-01T12:00:00.000Z"
+  },
+  {
+    "id": "7c46cde5-feb2-4ba3-9f32-0b4c3352a19e",
+    "amount": 450.0,
+    "date": "2025-06-06",
+    "tags": [
+      "freelance",
+      "work"
+    ],
+    "description": "Freelance consulting services",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2025-06-06T12:00:00.000Z",
+    "updatedAt": "2025-06-06T12:00:00.000Z"
+  },
+  {
+    "id": "439016b7-57f3-4d3e-8d8e-43262d146216",
+    "amount": 3200.0,
+    "date": "2025-07-01",
+    "tags": [
+      "salary"
+    ],
+    "description": "Acme Corp Monthly Salary",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2025-07-01T12:00:00.000Z",
+    "updatedAt": "2025-07-01T12:00:00.000Z"
+  },
+  {
+    "id": "af67e62a-9e91-455e-8b54-b112b05d213d",
+    "amount": 3200.0,
+    "date": "2025-08-01",
+    "tags": [
+      "salary"
+    ],
+    "description": "Acme Corp Monthly Salary",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2025-08-01T12:00:00.000Z",
+    "updatedAt": "2025-08-01T12:00:00.000Z"
+  },
+  {
+    "id": "a825ccde-4583-4d9b-a177-4b1c691f97bb",
+    "amount": 3200.0,
+    "date": "2025-09-01",
+    "tags": [
+      "salary"
+    ],
+    "description": "Acme Corp Monthly Salary",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2025-09-01T12:00:00.000Z",
+    "updatedAt": "2025-09-01T12:00:00.000Z"
+  },
+  {
+    "id": "8b4a3b76-f7bf-4d36-9356-9e3b2b7092be",
+    "amount": 250.0,
+    "date": "2025-09-26",
+    "tags": [
+      "freelance",
+      "work"
+    ],
+    "description": "Freelance consulting services",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2025-09-26T12:00:00.000Z",
+    "updatedAt": "2025-09-26T12:00:00.000Z"
+  },
+  {
+    "id": "8fcbf8f4-28be-4751-be4b-ffaa8c424d4f",
+    "amount": 19.41,
+    "date": "2025-09-28",
+    "tags": [
+      "personal",
+      "refund"
+    ],
+    "description": "Online store refund",
+    "account": "Credit card",
+    "verified": true,
+    "createdAt": "2025-09-28T12:00:00.000Z",
+    "updatedAt": "2025-09-28T12:00:00.000Z"
+  },
+  {
+    "id": "a1969a5f-1b3d-4a8a-9a14-6867a6e1c917",
+    "amount": 3200.0,
+    "date": "2025-10-01",
+    "tags": [
+      "salary"
+    ],
+    "description": "Acme Corp Monthly Salary",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2025-10-01T12:00:00.000Z",
+    "updatedAt": "2025-10-01T12:00:00.000Z"
+  },
+  {
+    "id": "aba34752-73dc-426b-83cf-f24a4e55ee22",
+    "amount": 300.0,
+    "date": "2025-10-03",
+    "tags": [
+      "freelance",
+      "work"
+    ],
+    "description": "Freelance consulting services",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2025-10-03T12:00:00.000Z",
+    "updatedAt": "2025-10-03T12:00:00.000Z"
+  },
+  {
+    "id": "5146f32a-7284-480a-bce8-d4d2374ad021",
+    "amount": 300.0,
+    "date": "2025-10-31",
+    "tags": [
+      "freelance",
+      "work"
+    ],
+    "description": "Freelance consulting services",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2025-10-31T12:00:00.000Z",
+    "updatedAt": "2025-10-31T12:00:00.000Z"
+  },
+  {
+    "id": "9aa97932-bc3b-44bf-9489-11255dced704",
+    "amount": 3200.0,
+    "date": "2025-11-01",
+    "tags": [
+      "salary"
+    ],
+    "description": "Acme Corp Monthly Salary",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2025-11-01T12:00:00.000Z",
+    "updatedAt": "2025-11-01T12:00:00.000Z"
+  },
+  {
+    "id": "f593a84c-24ec-43f2-8a38-98708d26132e",
+    "amount": 18.98,
+    "date": "2025-11-19",
+    "tags": [
+      "personal",
+      "refund"
+    ],
+    "description": "Online store refund",
+    "account": "Credit card",
+    "verified": true,
+    "createdAt": "2025-11-19T12:00:00.000Z",
+    "updatedAt": "2025-11-19T12:00:00.000Z"
+  },
+  {
+    "id": "773b3a30-759d-400f-927b-fbe2b2ba00bb",
+    "amount": 250.0,
+    "date": "2025-11-21",
+    "tags": [
+      "freelance",
+      "work"
+    ],
+    "description": "Freelance consulting services",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2025-11-21T12:00:00.000Z",
+    "updatedAt": "2025-11-21T12:00:00.000Z"
+  },
+  {
+    "id": "382fd10d-2a4d-4410-a7d3-069c11eed96b",
+    "amount": 3200.0,
+    "date": "2025-12-01",
+    "tags": [
+      "salary"
+    ],
+    "description": "Acme Corp Monthly Salary",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2025-12-01T12:00:00.000Z",
+    "updatedAt": "2025-12-01T12:00:00.000Z"
+  },
+  {
+    "id": "25d43d58-505e-429b-96be-93e1f7aed804",
+    "amount": 3200.0,
+    "date": "2026-01-01",
+    "tags": [
+      "salary"
+    ],
+    "description": "Acme Corp Monthly Salary",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2026-01-01T12:00:00.000Z",
+    "updatedAt": "2026-01-01T12:00:00.000Z"
+  },
+  {
+    "id": "d6d5c817-800c-4d39-80f6-66d0c7d0897a",
+    "amount": 3200.0,
+    "date": "2026-02-01",
+    "tags": [
+      "salary"
+    ],
+    "description": "Acme Corp Monthly Salary",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2026-02-01T12:00:00.000Z",
+    "updatedAt": "2026-02-01T12:00:00.000Z"
+  },
+  {
+    "id": "ae2b504b-9db5-4164-82e5-0657b00d421c",
+    "amount": 3200.0,
+    "date": "2026-03-01",
+    "tags": [
+      "salary"
+    ],
+    "description": "Acme Corp Monthly Salary",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2026-03-01T12:00:00.000Z",
+    "updatedAt": "2026-03-01T12:00:00.000Z"
+  },
+  {
+    "id": "16c954b9-83cc-4ffa-8ee7-3c9f21f778ff",
+    "amount": 3200.0,
+    "date": "2026-04-01",
+    "tags": [
+      "salary"
+    ],
+    "description": "Acme Corp Monthly Salary",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2026-04-01T12:00:00.000Z",
+    "updatedAt": "2026-04-01T12:00:00.000Z"
+  },
+  {
+    "id": "fd35f861-9d4f-409b-87a8-3469235002ae",
+    "amount": 3200.0,
+    "date": "2026-05-01",
+    "tags": [
+      "salary"
+    ],
+    "description": "Acme Corp Monthly Salary",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2026-05-01T12:00:00.000Z",
+    "updatedAt": "2026-05-01T12:00:00.000Z"
+  },
+  {
+    "id": "02963512-ef31-4190-98ef-fd789396795d",
+    "amount": 3200.0,
+    "date": "2026-06-01",
+    "tags": [
+      "salary"
+    ],
+    "description": "Acme Corp Monthly Salary",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2026-06-01T12:00:00.000Z",
+    "updatedAt": "2026-06-01T12:00:00.000Z"
+  },
+  {
+    "id": "ddd5b5d7-691c-41f6-8c65-cba391527560",
+    "amount": 600.0,
+    "date": "2026-06-19",
+    "tags": [
+      "freelance",
+      "work"
+    ],
+    "description": "Freelance consulting services",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2026-06-19T12:00:00.000Z",
+    "updatedAt": "2026-06-19T12:00:00.000Z"
+  },
+  {
+    "id": "8b8f180e-01db-4745-b8e2-a466a901ff4f",
+    "amount": 3200.0,
+    "date": "2026-07-01",
+    "tags": [
+      "salary"
+    ],
+    "description": "Acme Corp Monthly Salary",
+    "account": "Checking",
+    "verified": true,
+    "createdAt": "2026-07-01T12:00:00.000Z",
+    "updatedAt": "2026-07-01T12:00:00.000Z"
+  },
+  {
+    "id": "ad8179fc-0926-43b5-a43f-5899ca53eabe",
+    "amount": 70.67,
+    "date": "2026-07-01",
+    "tags": [
+      "personal",
+      "refund"
+    ],
+    "description": "Online store refund",
+    "account": "Credit card",
+    "verified": true,
+    "createdAt": "2026-07-01T12:00:00.000Z",
+    "updatedAt": "2026-07-01T12:00:00.000Z"
   }
 ]
