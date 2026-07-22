@@ -1,3 +1,126 @@
+const translations = {
+  en: {
+    appTitle: "Financial Tracker",
+    prototypeBadge: "Local JSON prototype",
+    statusReady: "Ready",
+    statusSaving: "Saving",
+    statusDeleting: "Deleting",
+    totalIncome: "Total income",
+    totalExpenses: "Total expenses",
+    netBalance: "Net balance",
+    unverifiedExpenses: "Unverified expenses",
+    tabExpense: "Expense",
+    tabIncome: "Income",
+    labelAmount: "Amount",
+    labelDate: "Date",
+    labelTags: "Tags",
+    labelDescription: "Description",
+    labelAccount: "Account",
+    markExpenseVerified: "Mark expense as already verified",
+    markIncomeVerified: "Mark income as already verified",
+    addExpenseBtn: "Add expense",
+    addIncomeBtn: "Add income",
+    aiAssistantTitle: "AI Assistant",
+    aiAssistantSub: "Add with Natural Language",
+    aiPlaceholder: "e.g., Yesterday I spent 45 dollars on groceries with checking account",
+    aiSendBtn: "Send to AI",
+    verifyAuditEyebrow: "Verify and audit",
+    expensesTitle: "Expenses",
+    incomesTitle: "Incomes",
+    filterAllExpenses: "All expenses",
+    filterUnverifiedOnly: "Unverified only",
+    filterVerifiedOnly: "Verified only",
+    filterAllIncomes: "All incomes",
+    reportsEyebrow: "Reports",
+    reportsTitle: "Spending and Income Analysis",
+    expensesByTagTitle: "Expenses by tag",
+    incomeByTagTitle: "Income by tag",
+    expensesPieTitle: "Expenses Tag Breakdown",
+    lastUpdatesTitle: "Last updates",
+    historicalCashflowTitle: "Historical Cashflow",
+    incomeAndExpenses: "Income & Expenses",
+    runningBalance: "Running Balance",
+    allTags: "All Tags",
+    startDate: "Start Date:",
+    endDate: "End Date:",
+    presetThisMonth: "This Month",
+    presetThisYear: "This Year",
+    presetAllTime: "All Time",
+    needsVerification: "Needs verification",
+    verified: "Verified",
+    btnVerify: "Verify",
+    btnUnverify: "Unverify",
+    btnCancel: "Cancel",
+    btnSave: "Save changes",
+    editModalTitle: "Edit Transaction",
+    noData: "No data yet.",
+    noExpensesMatch: "No expenses match this view.",
+    noIncomesMatch: "No incomes match this view.",
+    noUpdatesYet: "No recent updates yet.",
+    noExpensesTimeframe: "No expenses recorded for this date range."
+  },
+  es: {
+    appTitle: "Control Financiero",
+    prototypeBadge: "Prototipo JSON Local",
+    statusReady: "Listo",
+    statusSaving: "Guardando",
+    statusDeleting: "Eliminando",
+    totalIncome: "Ingresos totales",
+    totalExpenses: "Gastos totales",
+    netBalance: "Balance neto",
+    unverifiedExpenses: "Gastos sin verificar",
+    tabExpense: "Gasto",
+    tabIncome: "Ingreso",
+    labelAmount: "Monto",
+    labelDate: "Fecha",
+    labelTags: "Etiquetas",
+    labelDescription: "Descripción",
+    labelAccount: "Cuenta",
+    markExpenseVerified: "Marcar gasto como ya verificado",
+    markIncomeVerified: "Marcar ingreso como ya verificado",
+    addExpenseBtn: "Agregar gasto",
+    addIncomeBtn: "Agregar ingreso",
+    aiAssistantTitle: "Asistente IA",
+    aiAssistantSub: "Agregar con Lenguaje Natural",
+    aiPlaceholder: "Ej: Ayer gasté 45000 pesos en mercado con Bancolombia",
+    aiSendBtn: "Enviar a la IA",
+    verifyAuditEyebrow: "Verificar y auditar",
+    expensesTitle: "Gastos",
+    incomesTitle: "Ingresos",
+    filterAllExpenses: "Todos los gastos",
+    filterUnverifiedOnly: "Solo sin verificar",
+    filterVerifiedOnly: "Solo verificados",
+    filterAllIncomes: "Todos los ingresos",
+    reportsEyebrow: "Reportes",
+    reportsTitle: "Análisis de Gastos e Ingresos",
+    expensesByTagTitle: "Gastos por etiqueta",
+    incomeByTagTitle: "Ingresos por etiqueta",
+    expensesPieTitle: "Distribución de Gastos por Etiqueta",
+    lastUpdatesTitle: "Últimas actualizaciones",
+    historicalCashflowTitle: "Flujo de Caja Histórico",
+    incomeAndExpenses: "Ingresos y Gastos",
+    runningBalance: "Balance Acumulado",
+    allTags: "Todas las etiquetas",
+    startDate: "Fecha Inicio:",
+    endDate: "Fecha Fin:",
+    presetThisMonth: "Este Mes",
+    presetThisYear: "Este Año",
+    presetAllTime: "Todo el Histórico",
+    needsVerification: "Requiere verificación",
+    verified: "Verificado",
+    btnVerify: "Verificar",
+    btnUnverify: "Desmarcar",
+    btnCancel: "Cancelar",
+    btnSave: "Guardar cambios",
+    editModalTitle: "Modificar Transacción",
+    noData: "Sin datos aún.",
+    noExpensesMatch: "No hay gastos que coincidan.",
+    noIncomesMatch: "No hay ingresos que coincidan.",
+    noUpdatesYet: "No hay actualizaciones recientes aún.",
+    noExpensesTimeframe: "No hay gastos registrados en este rango de fechas."
+  }
+};
+
 const state = {
   expenses: [],
   incomes: [],
@@ -5,12 +128,24 @@ const state = {
   entryType: "expenses",
   expenseFilter: "all",
   incomeFilter: "all",
+  lang: "es", // Default language Spanish
 };
 
-const money = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-});
+let moneyFormatter = new Intl.NumberFormat("es-CO", { style: "currency", currency: "COP", maximumFractionDigits: 0 });
+
+const money = {
+  format(val) {
+    return moneyFormatter.format(val);
+  }
+};
+
+function updateMoneyFormatter() {
+  if (state.lang === "es") {
+    moneyFormatter = new Intl.NumberFormat("es-CO", { style: "currency", currency: "COP", maximumFractionDigits: 0 });
+  } else {
+    moneyFormatter = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" });
+  }
+}
 
 const els = {
   form: document.querySelector("#entry-form"),
@@ -21,7 +156,7 @@ const els = {
   verifiedRow: document.querySelector("#verified-row"),
   expenseFilter: document.querySelector("#expense-filter"),
   expenseList: document.querySelector("#expense-list"),
-  incomeList: document.querySelector("#income-list"),
+  incomeList: document.querySelector("#recent-updates-list"),
   incomeFilter: document.querySelector("#income-filter"),
   incomeAuditList: document.querySelector("#income-audit-list"),
   metrics: {
@@ -32,10 +167,36 @@ const els = {
   },
   expensesByTag: document.querySelector("#expenses-by-tag"),
   incomesByTag: document.querySelector("#incomes-by-tag"),
+  editModal: document.querySelector("#edit-modal"),
+  editForm: document.querySelector("#edit-form"),
+  editModalClose: document.querySelector("#edit-modal-close"),
+  editModalCancel: document.querySelector("#edit-modal-cancel"),
 };
 
-function setStatus(text) {
-  els.saveStatus.textContent = text;
+function setStatus(textKey) {
+  const dict = translations[state.lang] || translations.en;
+  els.saveStatus.textContent = dict[textKey] || textKey;
+}
+
+function applyTranslations() {
+  const lang = state.lang;
+  const dict = translations[lang] || translations.en;
+
+  document.querySelectorAll("[data-i18n]").forEach((el) => {
+    const key = el.dataset.i18n;
+    if (dict[key]) {
+      if (el.tagName === "INPUT" && el.type === "text") {
+        // Leave placeholder intact or translate
+      } else if (el.tagName === "TEXTAREA") {
+        el.placeholder = dict[key];
+      } else {
+        el.textContent = dict[key];
+      }
+    }
+  });
+
+  updateMoneyFormatter();
+  setEntryType(state.entryType);
 }
 
 async function api(path, options = {}) {
@@ -50,8 +211,38 @@ async function api(path, options = {}) {
   return data;
 }
 
+function initReportDates() {
+  const startDateInput = document.getElementById("report-start-date");
+  const endDateInput = document.getElementById("report-end-date");
+  if (!startDateInput || !endDateInput) return;
+
+  const todayStr = new Date().toISOString().slice(0, 10);
+  if (!endDateInput.value) {
+    endDateInput.value = todayStr;
+  }
+
+  if (!startDateInput.value) {
+    let earliest = todayStr;
+    [...state.expenses, ...state.incomes].forEach((t) => {
+      if (t.date && t.date < earliest) earliest = t.date;
+    });
+    startDateInput.value = earliest;
+  }
+}
+
+function getReportDateRange() {
+  const startDateInput = document.getElementById("report-start-date");
+  const endDateInput = document.getElementById("report-end-date");
+  
+  const todayStr = new Date().toISOString().slice(0, 10);
+  const startStr = (startDateInput && startDateInput.value) ? startDateInput.value : "2000-01-01";
+  const endStr = (endDateInput && endDateInput.value) ? endDateInput.value : todayStr;
+
+  return { startStr, endStr };
+}
+
 async function loadData() {
-  setStatus("Loading");
+  setStatus("statusSaving");
   const [expenses, incomes, reports] = await Promise.all([
     api("/api/expenses"),
     api("/api/incomes"),
@@ -61,15 +252,18 @@ async function loadData() {
   state.expenses = expenses;
   state.incomes = incomes;
   state.reports = reports;
+
+  initReportDates();
   populateTagFilter();
+  applyTranslations();
   render();
-  setStatus("Ready");
+  setStatus("statusReady");
 }
 
 function render() {
   renderMetrics();
   renderExpenses();
-  renderIncome();
+  renderLastUpdates();
   renderAuditIncomes();
   renderExpensesByTag();
   renderIncomesByTag();
@@ -109,13 +303,14 @@ function renderGroupedList(items, rowRenderer, emptyMessage) {
     return `<div class="empty">${emptyMessage}</div>`;
   }
 
-  // Sort descending by date
   const sorted = [...items].sort((a, b) => b.date.localeCompare(a.date));
 
   let lastMonth = "";
   let lastWeek = "";
   let lastDay = "";
   let html = "";
+
+  const loc = state.lang === "es" ? "es-ES" : "en-US";
 
   for (const item of sorted) {
     const dateStr = item.date;
@@ -125,7 +320,7 @@ function renderGroupedList(items, rowRenderer, emptyMessage) {
 
     if (month !== lastMonth) {
       const d = new Date(dateStr + "T12:00:00");
-      const monthName = d.toLocaleDateString("en-US", { month: "long", year: "numeric" });
+      const monthName = d.toLocaleDateString(loc, { month: "long", year: "numeric" });
       html += `<div class="list-header-month">📅 ${monthName}</div>`;
       lastMonth = month;
       lastWeek = "";
@@ -134,17 +329,17 @@ function renderGroupedList(items, rowRenderer, emptyMessage) {
 
     if (week !== lastWeek) {
       const d = new Date(week + "T12:00:00");
-      const weekStartStr = d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+      const weekStartStr = d.toLocaleDateString(loc, { month: "short", day: "numeric" });
       const endOfWeek = new Date(d.setDate(d.getDate() + 6));
-      const weekEndStr = endOfWeek.toLocaleDateString("en-US", { month: "short", day: "numeric" });
-      html += `<div class="list-header-week">🗓️ Week of ${weekStartStr} - ${weekEndStr}</div>`;
+      const weekEndStr = endOfWeek.toLocaleDateString(loc, { month: "short", day: "numeric" });
+      html += `<div class="list-header-week">🗓️ ${weekStartStr} - ${weekEndStr}</div>`;
       lastWeek = week;
       lastDay = "";
     }
 
     if (day !== lastDay) {
       const d = new Date(dateStr + "T12:00:00");
-      const dayName = d.toLocaleDateString("en-US", { weekday: "long", month: "short", day: "numeric" });
+      const dayName = d.toLocaleDateString(loc, { weekday: "long", month: "short", day: "numeric" });
       html += `<div class="list-header-day">📌 ${dayName}</div>`;
       lastDay = day;
     }
@@ -156,16 +351,18 @@ function renderGroupedList(items, rowRenderer, emptyMessage) {
 }
 
 function renderExpenses() {
+  const dict = translations[state.lang] || translations.en;
   const filtered = state.expenses.filter((expense) => {
     if (state.expenseFilter === "verified") return expense.verified;
     if (state.expenseFilter === "unverified") return !expense.verified;
     return true;
   });
 
-  els.expenseList.innerHTML = renderGroupedList(filtered, renderExpenseRow, "No expenses match this view.");
+  els.expenseList.innerHTML = renderGroupedList(filtered, renderExpenseRow, dict.noExpensesMatch);
 }
 
 function renderExpenseRow(expense) {
+  const dict = translations[state.lang] || translations.en;
   return `
     <article class="record">
       <div>
@@ -173,15 +370,16 @@ function renderExpenseRow(expense) {
           <strong>${money.format(expense.amount)}</strong>
           <span>${escapeHtml(expense.date)}</span>
           <span class="${expense.verified ? "verified" : "unverified"}">
-            ${expense.verified ? "Verified" : "Needs verification"}
+            ${expense.verified ? dict.verified : dict.needsVerification}
           </span>
         </div>
-        <div class="record-meta">${escapeHtml(expense.description || "No description")} ${expense.account ? `- ${escapeHtml(expense.account)}` : ""}</div>
+        <div class="record-meta">${escapeHtml(expense.description || "")} ${expense.account ? `- ${escapeHtml(expense.account)}` : ""}</div>
         <div class="tags">${expense.tags.map((tag) => `<span class="tag" style="${getTagStyle(tag)}">${escapeHtml(tag)}</span>`).join("")}</div>
       </div>
       <div class="record-actions">
+        <button class="edit-button" type="button" aria-label="Edit expense" data-edit="${expense.id}" data-type="expenses">✏️</button>
         <button class="verify-button" type="button" data-verify="${expense.id}" data-value="${!expense.verified}">
-          ${expense.verified ? "Unverify" : "Verify"}
+          ${expense.verified ? dict.btnUnverify : dict.btnVerify}
         </button>
         <button class="delete-button" type="button" aria-label="Delete expense" data-delete-expense="${expense.id}">x</button>
       </div>
@@ -190,16 +388,18 @@ function renderExpenseRow(expense) {
 }
 
 function renderAuditIncomes() {
+  const dict = translations[state.lang] || translations.en;
   const filtered = state.incomes.filter((income) => {
     if (state.incomeFilter === "verified") return income.verified;
     if (state.incomeFilter === "unverified") return !income.verified;
     return true;
   });
 
-  els.incomeAuditList.innerHTML = renderGroupedList(filtered, renderIncomeRow, "No incomes match this view.");
+  els.incomeAuditList.innerHTML = renderGroupedList(filtered, renderIncomeRow, dict.noIncomesMatch);
 }
 
 function renderIncomeRow(income) {
+  const dict = translations[state.lang] || translations.en;
   return `
     <article class="record">
       <div>
@@ -207,15 +407,16 @@ function renderIncomeRow(income) {
           <strong>${money.format(income.amount)}</strong>
           <span>${escapeHtml(income.date)}</span>
           <span class="${income.verified ? "verified" : "unverified"}">
-            ${income.verified ? "Verified" : "Needs verification"}
+            ${income.verified ? dict.verified : dict.needsVerification}
           </span>
         </div>
-        <div class="record-meta">${escapeHtml(income.description || "No description")} ${income.account ? `- ${escapeHtml(income.account)}` : ""}</div>
+        <div class="record-meta">${escapeHtml(income.description || "")} ${income.account ? `- ${escapeHtml(income.account)}` : ""}</div>
         <div class="tags">${income.tags.map((tag) => `<span class="tag" style="${getTagStyle(tag)}">${escapeHtml(tag)}</span>`).join("")}</div>
       </div>
       <div class="record-actions">
+        <button class="edit-button" type="button" aria-label="Edit income" data-edit="${income.id}" data-type="incomes">✏️</button>
         <button class="verify-button" type="button" data-verify-income="${income.id}" data-value="${!income.verified}">
-          ${income.verified ? "Unverify" : "Verify"}
+          ${income.verified ? dict.btnUnverify : dict.btnVerify}
         </button>
         <button class="delete-button" type="button" aria-label="Delete income" data-delete-income="${income.id}">x</button>
       </div>
@@ -223,31 +424,53 @@ function renderIncomeRow(income) {
   `;
 }
 
-function renderIncomeRowCompact(income) {
-  return `
-    <article class="record compact-row">
-      <div>
-        <div class="record-title">
-          <strong>${money.format(income.amount)}</strong>
-          <span>${escapeHtml(income.date)}</span>
-        </div>
-        <div class="record-meta">${escapeHtml(income.description || "No description")} ${income.account ? `- ${escapeHtml(income.account)}` : ""}</div>
-        <div class="tags">${income.tags.map((tag) => `<span class="tag" style="${getTagStyle(tag)}">${escapeHtml(tag)}</span>`).join("")}</div>
-      </div>
-      <div class="record-actions">
-        <button class="delete-button" type="button" aria-label="Delete income" data-delete-income="${income.id}">x</button>
-      </div>
-    </article>
-  `;
-}
+// Render Last Updates (Incomes and Outcomes sorted descending by updatedAt)
+function renderLastUpdates() {
+  const { startStr, endStr } = getReportDateRange();
+  const dict = translations[state.lang] || translations.en;
 
-function renderIncome() {
-  els.incomeList.innerHTML = renderGroupedList(state.incomes, renderIncomeRowCompact, "No income recorded yet.");
+  const combined = [
+    ...state.expenses.filter(e => e.date >= startStr && e.date <= endStr).map(e => ({ ...e, _type: "expenses" })),
+    ...state.incomes.filter(i => i.date >= startStr && i.date <= endStr).map(i => ({ ...i, _type: "incomes" }))
+  ];
+
+  const getTimestamp = (item) => item.updatedAt || item.createdAt || `${item.date}T12:00:00.000Z`;
+  combined.sort((a, b) => getTimestamp(b).localeCompare(getTimestamp(a)));
+
+  if (!combined.length) {
+    els.incomeList.innerHTML = `<div class="empty">${dict.noUpdatesYet}</div>`;
+    return;
+  }
+
+  els.incomeList.innerHTML = combined.slice(0, 30).map(item => {
+    const isExpense = item._type === "expenses";
+    const badgeClass = isExpense ? "expense" : "income";
+    const badgeText = isExpense ? dict.tabExpense : dict.tabIncome;
+
+    return `
+      <article class="record compact-row">
+        <div>
+          <div class="record-title">
+            <span class="type-badge ${badgeClass}">${badgeText}</span>
+            <strong>${money.format(item.amount)}</strong>
+            <span>${escapeHtml(item.date)}</span>
+          </div>
+          <div class="record-meta">${escapeHtml(item.description || "")} ${item.account ? `- ${escapeHtml(item.account)}` : ""}</div>
+          <div class="tags">${item.tags.map((tag) => `<span class="tag" style="${getTagStyle(tag)}">${escapeHtml(tag)}</span>`).join("")}</div>
+        </div>
+        <div class="record-actions">
+          <button class="edit-button" type="button" aria-label="Edit record" data-edit="${item.id}" data-type="${item._type}">✏️</button>
+          <button class="delete-button" type="button" aria-label="Delete record" data-delete-${isExpense ? "expense" : "income"}="${item.id}">x</button>
+        </div>
+      </article>
+    `;
+  }).join("");
 }
 
 function renderBars(container, rows) {
+  const dict = translations[state.lang] || translations.en;
   if (!rows.length) {
-    container.innerHTML = `<div class="empty">No data yet.</div>`;
+    container.innerHTML = `<div class="empty">${dict.noData}</div>`;
     return;
   }
 
@@ -264,27 +487,11 @@ function renderBars(container, rows) {
 }
 
 function renderExpensesByTag() {
-  const select = document.getElementById("expenses-tag-timeframe");
-  const timeframe = select ? select.value : "monthly";
-
-  const today = new Date();
-  let startDate = new Date();
-  
-  if (timeframe === "weekly") {
-    startDate = new Date(getStartOfWeek(today.toISOString().slice(0, 10)) + "T12:00:00");
-  } else if (timeframe === "monthly") {
-    startDate = new Date(today.getFullYear(), today.getMonth(), 1);
-  } else if (timeframe === "yearly") {
-    startDate = new Date(today.getFullYear(), 0, 1);
-  } else {
-    startDate = new Date(0);
-  }
-
-  const startDateStr = startDate.toISOString().slice(0, 10);
+  const { startStr, endStr } = getReportDateRange();
 
   const tagTotals = {};
   state.expenses.forEach(exp => {
-    if (exp.date >= startDateStr) {
+    if (exp.date >= startStr && exp.date <= endStr) {
       exp.tags.forEach(tag => {
         tagTotals[tag] = (tagTotals[tag] || 0) + exp.amount;
       });
@@ -299,27 +506,11 @@ function renderExpensesByTag() {
 }
 
 function renderIncomesByTag() {
-  const select = document.getElementById("incomes-tag-timeframe");
-  const timeframe = select ? select.value : "monthly";
-
-  const today = new Date();
-  let startDate = new Date();
-  
-  if (timeframe === "weekly") {
-    startDate = new Date(getStartOfWeek(today.toISOString().slice(0, 10)) + "T12:00:00");
-  } else if (timeframe === "monthly") {
-    startDate = new Date(today.getFullYear(), today.getMonth(), 1);
-  } else if (timeframe === "yearly") {
-    startDate = new Date(today.getFullYear(), 0, 1);
-  } else {
-    startDate = new Date(0);
-  }
-
-  const startDateStr = startDate.toISOString().slice(0, 10);
+  const { startStr, endStr } = getReportDateRange();
 
   const tagTotals = {};
   state.incomes.forEach(inc => {
-    if (inc.date >= startDateStr) {
+    if (inc.date >= startStr && inc.date <= endStr) {
       inc.tags.forEach(tag => {
         tagTotals[tag] = (tagTotals[tag] || 0) + inc.amount;
       });
@@ -338,6 +529,7 @@ let balanceChartInstance = null;
 let pieChartInstance = null;
 
 function populateTagFilter() {
+  const dict = translations[state.lang] || translations.en;
   const allTags = new Set();
   state.expenses.forEach(exp => exp.tags.forEach(t => allTags.add(t)));
   state.incomes.forEach(inc => inc.tags.forEach(t => allTags.add(t)));
@@ -346,7 +538,7 @@ function populateTagFilter() {
   if (!select) return;
   const currentValue = select.value;
 
-  let html = `<option value="all">All Tags</option>`;
+  let html = `<option value="all">${dict.allTags}</option>`;
   Array.from(allTags).sort().forEach(tag => {
     html += `<option value="${escapeHtml(tag)}">${escapeHtml(tag)}</option>`;
   });
@@ -363,29 +555,21 @@ function renderCashflowChart() {
   const canvas = document.getElementById("cashflow-chart");
   if (!canvas) return;
 
-  const periodSelect = document.getElementById("cashflow-period");
   const tagSelect = document.getElementById("cashflow-tag-filter");
-  const period = periodSelect ? periodSelect.value : "2";
   const selectedTag = tagSelect ? tagSelect.value : "all";
+  const { startStr: startDateStr, endStr: endDateStr } = getReportDateRange();
+  const dict = translations[state.lang] || translations.en;
 
-  const today = new Date();
-  let startDate = new Date();
-  
-  if (period === "all") {
-    let earliest = today.toISOString().slice(0, 10);
-    [...state.expenses, ...state.incomes].forEach(t => {
-      if (t.date < earliest) earliest = t.date;
-    });
-    startDate = new Date(earliest + "T12:00:00");
-  } else {
-    startDate.setMonth(today.getMonth() - parseInt(period));
-  }
-  const startDateStr = startDate.toISOString().slice(0, 10);
+  const startDate = new Date(startDateStr + "T12:00:00");
+  const endDate = new Date(endDateStr + "T12:00:00");
+
+  const diffTime = Math.abs(endDate - startDate);
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
   let interval = "month";
-  if (period === "1" || period === "2") {
+  if (diffDays <= 60) {
     interval = "day";
-  } else if (period === "3" || period === "6") {
+  } else if (diffDays <= 180) {
     interval = "week";
   }
 
@@ -404,7 +588,7 @@ function renderCashflowChart() {
 
   if (interval === "day") {
     let curr = new Date(startDate);
-    while (curr <= today) {
+    while (curr <= endDate) {
       const dateStr = curr.toISOString().slice(0, 10);
       labels.push(dateStr);
 
@@ -426,13 +610,13 @@ function renderCashflowChart() {
     }
   } else if (interval === "week") {
     let curr = new Date(getStartOfWeek(startDateStr) + "T12:00:00");
-    while (curr <= today) {
+    while (curr <= endDate) {
       const weekStartStr = curr.toISOString().slice(0, 10);
       const weekEnd = new Date(curr);
       weekEnd.setDate(weekEnd.getDate() + 6);
       const weekEndStr = weekEnd.toISOString().slice(0, 10);
 
-      labels.push(`Week of ${weekStartStr.slice(5)}`);
+      labels.push(`${weekStartStr.slice(5)}`);
 
       const weekIncomes = state.incomes.filter(inc => inc.date >= weekStartStr && inc.date <= weekEndStr && (selectedTag === "all" || inc.tags.includes(selectedTag)));
       const weekExpenses = state.expenses.filter(exp => exp.date >= weekStartStr && exp.date <= weekEndStr && (selectedTag === "all" || exp.tags.includes(selectedTag)));
@@ -452,7 +636,7 @@ function renderCashflowChart() {
     }
   } else {
     let curr = new Date(startDate.getFullYear(), startDate.getMonth(), 1);
-    while (curr <= today) {
+    while (curr <= endDate) {
       const year = curr.getFullYear();
       const month = String(curr.getMonth() + 1).padStart(2, "0");
       const monthStr = `${year}-${month}`;
@@ -488,7 +672,7 @@ function renderCashflowChart() {
       labels: labels,
       datasets: [
         {
-          label: "Incomes",
+          label: dict.tabIncome || "Incomes",
           data: incomeData,
           borderColor: "#319795",
           backgroundColor: "rgba(49, 151, 149, 0.05)",
@@ -496,7 +680,7 @@ function renderCashflowChart() {
           fill: false
         },
         {
-          label: "Expenses",
+          label: dict.tabExpense || "Expenses",
           data: expenseData,
           borderColor: "#e53e3e",
           backgroundColor: "rgba(229, 62, 62, 0.05)",
@@ -511,14 +695,14 @@ function renderCashflowChart() {
       scales: {
         y: {
           ticks: {
-            callback: (v) => "$" + v.toLocaleString()
+            callback: (v) => money.format(v)
           }
         }
       },
       plugins: {
         tooltip: {
           callbacks: {
-            label: (ctx) => `${ctx.dataset.label}: $${ctx.raw.toFixed(2)}`
+            label: (ctx) => `${ctx.dataset.label}: ${money.format(ctx.raw)}`
           }
         }
       }
@@ -538,7 +722,7 @@ function renderCashflowChart() {
         labels: labels,
         datasets: [
           {
-            label: "Running Balance",
+            label: dict.runningBalance || "Running Balance",
             data: balanceData,
             borderColor: "#2d3748",
             backgroundColor: "rgba(45, 55, 72, 0.05)",
@@ -553,14 +737,14 @@ function renderCashflowChart() {
         scales: {
           y: {
             ticks: {
-              callback: (v) => "$" + v.toLocaleString()
+              callback: (v) => money.format(v)
             }
           }
         },
         plugins: {
           tooltip: {
             callbacks: {
-              label: (ctx) => `${ctx.dataset.label}: $${ctx.raw.toFixed(2)}`
+              label: (ctx) => `${ctx.dataset.label}: ${money.format(ctx.raw)}`
             }
           }
         }
@@ -573,27 +757,12 @@ function renderPieChart() {
   const canvas = document.getElementById("expenses-pie-chart");
   if (!canvas) return;
 
-  const timeframeSelect = document.getElementById("pie-timeframe");
-  const timeframe = timeframeSelect ? timeframeSelect.value : "monthly";
-
-  const today = new Date();
-  let startDate = new Date();
-  
-  if (timeframe === "weekly") {
-    startDate = new Date(getStartOfWeek(today.toISOString().slice(0, 10)) + "T12:00:00");
-  } else if (timeframe === "monthly") {
-    startDate = new Date(today.getFullYear(), today.getMonth(), 1);
-  } else if (timeframe === "yearly") {
-    startDate = new Date(today.getFullYear(), 0, 1);
-  } else {
-    startDate = new Date(0);
-  }
-
-  const startDateStr = startDate.toISOString().slice(0, 10);
+  const { startStr, endStr } = getReportDateRange();
+  const dict = translations[state.lang] || translations.en;
 
   const tagTotals = {};
   state.expenses.forEach(exp => {
-    if (exp.date >= startDateStr) {
+    if (exp.date >= startStr && exp.date <= endStr) {
       exp.tags.forEach(tag => {
         tagTotals[tag] = (tagTotals[tag] || 0) + exp.amount;
       });
@@ -625,7 +794,7 @@ function renderPieChart() {
     ctx.font = "14px sans-serif";
     ctx.fillStyle = "#a0aec0";
     ctx.textAlign = "center";
-    ctx.fillText("No expenses recorded for this timeframe.", canvas.width / 2, canvas.height / 2);
+    ctx.fillText(dict.noExpensesTimeframe, canvas.width / 2, canvas.height / 2);
     return;
   }
 
@@ -659,7 +828,7 @@ function renderPieChart() {
               const value = context.raw;
               const total = context.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
               const percentage = ((value / total) * 100).toFixed(1);
-              return `${context.label}: $${value.toFixed(2)} (${percentage}%)`;
+              return `${context.label}: ${money.format(value)} (${percentage}%)`;
             }
           }
         }
@@ -671,18 +840,30 @@ function renderPieChart() {
 function setEntryType(type) {
   state.entryType = type;
   els.typeInput.value = type;
-  els.submitButton.textContent = type === "expenses" ? "Add expense" : "Add income";
+  const dict = translations[state.lang] || translations.en;
+  els.submitButton.textContent = type === "expenses" ? dict.addExpenseBtn : dict.addIncomeBtn;
   
-  // Show verify checkbox for both expenses and incomes
   els.verifiedRow.style.display = "grid";
-  const checkbox = els.verifiedRow.querySelector("input[name='verified']");
-  if (checkbox && checkbox.nextSibling) {
-    checkbox.nextSibling.textContent = type === "expenses" ? " Mark expense as already verified" : " Mark income as already verified";
+  const labelText = document.getElementById("verified-label-text");
+  if (labelText) {
+    labelText.textContent = type === "expenses" ? dict.markExpenseVerified : dict.markIncomeVerified;
   }
 
   els.tabs.forEach((tab) => {
     tab.classList.toggle("active", tab.dataset.entryType === type);
   });
+}
+
+// Flash Animation for Panel List
+function triggerPanelFlash(type) {
+  const panelId = type === "expenses" ? "#expense-list" : "#income-audit-list";
+  const targetPanel = document.querySelector(panelId)?.closest(".panel");
+  if (targetPanel) {
+    targetPanel.classList.remove("flash-updated");
+    void targetPanel.offsetWidth; // Trigger reflow
+    targetPanel.classList.add("flash-updated");
+    setTimeout(() => targetPanel.classList.remove("flash-updated"), 2300);
+  }
 }
 
 async function submitEntry(event) {
@@ -699,7 +880,7 @@ async function submitEntry(event) {
   };
 
   try {
-    setStatus("Saving");
+    setStatus("statusSaving");
     await api(`/api/${type}`, {
       method: "POST",
       body: JSON.stringify(payload),
@@ -707,20 +888,78 @@ async function submitEntry(event) {
     els.form.reset();
     els.form.elements.date.value = new Date().toISOString().slice(0, 10);
     await loadData();
+    triggerPanelFlash(type);
+  } catch (error) {
+    setStatus(error.message);
+  }
+}
+
+// Edit Modal Handler
+function openEditModal(id, type) {
+  const collection = state[type] || [];
+  const record = collection.find(item => item.id === id);
+  if (!record) return;
+
+  document.querySelector("#edit-id").value = record.id;
+  document.querySelector("#edit-type").value = type;
+  document.querySelector("#edit-amount").value = record.amount;
+  document.querySelector("#edit-date").value = record.date;
+  document.querySelector("#edit-tags").value = record.tags.join(", ");
+  document.querySelector("#edit-description").value = record.description || "";
+  document.querySelector("#edit-account").value = record.account || "";
+  document.querySelector("#edit-verified").checked = Boolean(record.verified);
+
+  els.editModal.classList.add("active");
+}
+
+function closeEditModal() {
+  els.editModal.classList.remove("active");
+}
+
+async function submitEditForm(event) {
+  event.preventDefault();
+  const form = new FormData(els.editForm);
+  const id = form.get("id");
+  const type = form.get("type");
+
+  const payload = {
+    amount: Number(form.get("amount")),
+    date: form.get("date"),
+    tags: String(form.get("tags")).split(",").map((tag) => tag.trim()).filter(Boolean),
+    description: form.get("description"),
+    account: form.get("account"),
+    verified: form.get("verified") === "on",
+  };
+
+  try {
+    setStatus("statusSaving");
+    await api(`/api/${type}/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify(payload),
+    });
+    closeEditModal();
+    await loadData();
+    triggerPanelFlash(type);
   } catch (error) {
     setStatus(error.message);
   }
 }
 
 async function handleListClick(event) {
+  const editButton = event.target.closest("[data-edit]");
   const verifyButton = event.target.closest("[data-verify]");
   const verifyIncomeButton = event.target.closest("[data-verify-income]");
   const deleteExpenseButton = event.target.closest("[data-delete-expense]");
   const deleteIncomeButton = event.target.closest("[data-delete-income]");
 
   try {
+    if (editButton) {
+      openEditModal(editButton.dataset.edit, editButton.dataset.type);
+      return;
+    }
+
     if (verifyButton) {
-      setStatus("Saving");
+      setStatus("statusSaving");
       await api(`/api/expenses/${verifyButton.dataset.verify}`, {
         method: "PATCH",
         body: JSON.stringify({ verified: verifyButton.dataset.value === "true" }),
@@ -729,7 +968,7 @@ async function handleListClick(event) {
     }
 
     if (verifyIncomeButton) {
-      setStatus("Saving");
+      setStatus("statusSaving");
       await api(`/api/incomes/${verifyIncomeButton.dataset.verifyIncome}`, {
         method: "PATCH",
         body: JSON.stringify({ verified: verifyIncomeButton.dataset.value === "true" }),
@@ -738,13 +977,13 @@ async function handleListClick(event) {
     }
 
     if (deleteExpenseButton) {
-      setStatus("Deleting");
+      setStatus("statusDeleting");
       await api(`/api/expenses/${deleteExpenseButton.dataset.deleteExpense}`, { method: "DELETE" });
       await loadData();
     }
 
     if (deleteIncomeButton) {
-      setStatus("Deleting");
+      setStatus("statusDeleting");
       await api(`/api/incomes/${deleteIncomeButton.dataset.deleteIncome}`, { method: "DELETE" });
       await loadData();
     }
@@ -762,6 +1001,7 @@ function escapeHtml(value) {
     .replaceAll("'", "&#039;");
 }
 
+// Event bindings
 els.tabs.forEach((tab) => {
   tab.addEventListener("click", () => setEntryType(tab.dataset.entryType));
 });
@@ -779,9 +1019,71 @@ els.expenseList.addEventListener("click", handleListClick);
 els.incomeList.addEventListener("click", handleListClick);
 els.incomeAuditList.addEventListener("click", handleListClick);
 
+// Edit Modal events
+if (els.editForm) els.editForm.addEventListener("submit", submitEditForm);
+if (els.editModalClose) els.editModalClose.addEventListener("click", closeEditModal);
+if (els.editModalCancel) els.editModalCancel.addEventListener("click", closeEditModal);
+if (els.editModal) {
+  els.editModal.addEventListener("click", (e) => {
+    if (e.target === els.editModal) closeEditModal();
+  });
+}
+
 els.form.elements.date.value = new Date().toISOString().slice(0, 10);
-setEntryType("expenses");
-loadData();
+
+// Language Switcher binding
+const langToggleEl = document.getElementById("lang-toggle");
+if (langToggleEl) {
+  langToggleEl.addEventListener("change", (e) => {
+    state.lang = e.target.value;
+    applyTranslations();
+    populateTagFilter();
+    render();
+  });
+}
+
+// Report Date Picker bindings
+const reportStartDateEl = document.getElementById("report-start-date");
+const reportEndDateEl = document.getElementById("report-end-date");
+
+if (reportStartDateEl) {
+  reportStartDateEl.addEventListener("change", () => render());
+}
+if (reportEndDateEl) {
+  reportEndDateEl.addEventListener("change", () => render());
+}
+
+// Preset Buttons
+document.querySelectorAll(".preset-btn").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const preset = btn.dataset.preset;
+    const today = new Date();
+    const todayStr = today.toISOString().slice(0, 10);
+    
+    if (preset === "month") {
+      const year = today.getFullYear();
+      const month = String(today.getMonth() + 1).padStart(2, "0");
+      reportStartDateEl.value = `${year}-${month}-01`;
+      reportEndDateEl.value = todayStr;
+    } else if (preset === "year") {
+      reportStartDateEl.value = `${today.getFullYear()}-01-01`;
+      reportEndDateEl.value = todayStr;
+    } else if (preset === "all") {
+      let earliest = todayStr;
+      [...state.expenses, ...state.incomes].forEach((t) => {
+        if (t.date && t.date < earliest) earliest = t.date;
+      });
+      reportStartDateEl.value = earliest;
+      reportEndDateEl.value = todayStr;
+    }
+    render();
+  });
+});
+
+const cashflowTagFilterEl = document.getElementById("cashflow-tag-filter");
+if (cashflowTagFilterEl) {
+  cashflowTagFilterEl.addEventListener("change", renderCashflowChart);
+}
 
 // AI Assistant Features
 const aiEls = {
@@ -800,17 +1102,15 @@ function setAiStatus(text) {
   aiEls.status.textContent = text;
 }
 
-// Submit Natural Language prompt to Port 3001
 async function submitAiText(event) {
   event.preventDefault();
   const text = aiEls.textInput.value.trim();
   if (!text) return;
 
   try {
-    setAiStatus("AI is parsing transaction...");
+    setAiStatus("AI parsing...");
     aiEls.sendBtn.disabled = true;
 
-    // Call Port 3001 Parser
     const parserUrl = "http://localhost:3001/api/parse";
     const res = await fetch(parserUrl, {
       method: "POST",
@@ -824,20 +1124,18 @@ async function submitAiText(event) {
     }
 
     const { transaction } = await res.json();
-    setAiStatus(`AI resolved: ${transaction.type === "expenses" || transaction.type === "expense" ? "Expense" : "Income"} of $${transaction.amount}. Saving...`);
+    setAiStatus(`AI resolved transaction. Saving...`);
 
-    // Prepare payload for local tracker (Port 3000)
     const resolvedType = (transaction.type === "expenses" || transaction.type === "expense") ? "expenses" : "incomes";
     const payload = {
       amount: Number(transaction.amount),
       date: transaction.date,
       tags: Array.isArray(transaction.tags) ? transaction.tags : [transaction.tags].filter(Boolean),
       description: transaction.description || "Parsed by AI",
-      account: transaction.account || "Cash",
+      account: transaction.account || (state.lang === "es" ? "Efectivo" : "Cash"),
       verified: false
     };
 
-    // Post to Port 3000 local tracker endpoints
     const apiRes = await fetch(`/api/${resolvedType}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -849,9 +1147,10 @@ async function submitAiText(event) {
       throw new Error(apiErr.error || "Failed to save the transaction to tracker database.");
     }
 
-    setAiStatus("Transaction added successfully!");
+    setAiStatus("Transaction added!");
     aiEls.textInput.value = "";
     await loadData();
+    triggerPanelFlash(resolvedType);
   } catch (error) {
     console.error("[AI Assistant Error]", error);
     setAiStatus(`Error: ${error.message}`);
@@ -860,10 +1159,8 @@ async function submitAiText(event) {
   }
 }
 
-// Audio Recording Logic (utilizing Port 3002 STT)
 async function toggleVoiceRecording() {
   if (mediaRecorder && mediaRecorder.state === "recording") {
-    // Stop recording
     mediaRecorder.stop();
     return;
   }
@@ -880,14 +1177,12 @@ async function toggleVoiceRecording() {
     };
 
     mediaRecorder.onstop = async () => {
-      // Clean up audio tracks
       stream.getTracks().forEach(track => track.stop());
 
       try {
         setAiStatus("Sending voice to Speech-to-Text service...");
         const audioBlob = new Blob(audioChunks, { type: "audio/webm" });
 
-        // Send raw audio buffer to Port 3002 Transcribe Endpoint
         const sttRes = await fetch("http://localhost:3002/api/transcribe", {
           method: "POST",
           headers: { "Content-Type": "audio/webm" },
@@ -902,26 +1197,30 @@ async function toggleVoiceRecording() {
         const data = await sttRes.json();
         if (data.text) {
           aiEls.textInput.value = data.text;
-          setAiStatus("Voice transcribed successfully!");
+          setAiStatus("Voice transcribed!");
+          
+          // Trigger pulse animation on text area
+          aiEls.textInput.classList.remove("pulse-updated");
+          void aiEls.textInput.offsetWidth;
+          aiEls.textInput.classList.add("pulse-updated");
+          setTimeout(() => aiEls.textInput.classList.remove("pulse-updated"), 2300);
         } else {
-          setAiStatus("Could not transcribe voice. Please try again.");
+          setAiStatus("Could not transcribe voice.");
         }
 
       } catch (error) {
         console.error("[STT Error]", error);
         setAiStatus(`Transcription error: ${error.message}`);
       } finally {
-        // Reset recording UI button
         aiEls.micBtn.classList.remove("mic-recording");
         aiEls.micIcon.textContent = "🎙️";
       }
     };
 
-    // Start recording
     mediaRecorder.start();
     aiEls.micBtn.classList.add("mic-recording");
     aiEls.micIcon.textContent = "🟥";
-    setAiStatus("Recording... Click mic button again to stop.");
+    setAiStatus("Recording...");
 
   } catch (error) {
     console.error("[Microphone Access Error]", error);
@@ -931,7 +1230,6 @@ async function toggleVoiceRecording() {
   }
 }
 
-// Add AI Listeners
 if (aiEls.form) {
   aiEls.form.addEventListener("submit", submitAiText);
 }
@@ -939,24 +1237,4 @@ if (aiEls.micBtn) {
   aiEls.micBtn.addEventListener("click", toggleVoiceRecording);
 }
 
-// Bind chart filter changes
-const cashflowPeriodEl = document.getElementById("cashflow-period");
-if (cashflowPeriodEl) {
-  cashflowPeriodEl.addEventListener("change", renderCashflowChart);
-}
-const cashflowTagFilterEl = document.getElementById("cashflow-tag-filter");
-if (cashflowTagFilterEl) {
-  cashflowTagFilterEl.addEventListener("change", renderCashflowChart);
-}
-const pieTimeframeEl = document.getElementById("pie-timeframe");
-if (pieTimeframeEl) {
-  pieTimeframeEl.addEventListener("change", renderPieChart);
-}
-const expensesTagTimeframeEl = document.getElementById("expenses-tag-timeframe");
-if (expensesTagTimeframeEl) {
-  expensesTagTimeframeEl.addEventListener("change", renderExpensesByTag);
-}
-const incomesTagTimeframeEl = document.getElementById("incomes-tag-timeframe");
-if (incomesTagTimeframeEl) {
-  incomesTagTimeframeEl.addEventListener("change", renderIncomesByTag);
-}
+loadData();

@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Financial Tracker Prototype</title>
+    <title data-i18n="appTitle">Control Financiero</title>
     <link rel="stylesheet" href="/styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
@@ -11,27 +11,33 @@
     <main class="shell">
       <section class="topbar" aria-labelledby="app-title">
         <div>
-          <p class="eyebrow">Local JSON prototype</p>
-          <h1 id="app-title">Financial Tracker</h1>
+          <p class="eyebrow" data-i18n="prototypeBadge">Prototipo JSON Local</p>
+          <h1 id="app-title" data-i18n="appTitle">Control Financiero</h1>
         </div>
-        <div class="status" id="save-status" role="status">Ready</div>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <select id="lang-toggle" style="padding: 4px 10px; border-radius: 6px; border: 1px solid var(--line); font-size: 13px; font-weight: 600; cursor: pointer; background: #fff;">
+            <option value="es" selected>🇨🇴 Español</option>
+            <option value="en">🇺🇸 English</option>
+          </select>
+          <div class="status" id="save-status" role="status" data-i18n="statusReady">Listo</div>
+        </div>
       </section>
 
       <section class="metrics" aria-label="Financial summary">
         <article>
-          <span>Total income</span>
+          <span data-i18n="totalIncome">Ingresos totales</span>
           <strong id="metric-income">$0.00</strong>
         </article>
         <article>
-          <span>Total expenses</span>
+          <span data-i18n="totalExpenses">Gastos totales</span>
           <strong id="metric-expenses">$0.00</strong>
         </article>
         <article>
-          <span>Net balance</span>
+          <span data-i18n="netBalance">Balance neto</span>
           <strong id="metric-net">$0.00</strong>
         </article>
         <article>
-          <span>Unverified expenses</span>
+          <span data-i18n="unverifiedExpenses">Gastos sin verificar</span>
           <strong id="metric-unverified">0</strong>
         </article>
       </section>
@@ -40,47 +46,47 @@
         <div class="sidebar-column">
           <div class="panel entry-panel">
           <div class="tabs" role="tablist" aria-label="Entry type">
-            <button class="tab active" type="button" data-entry-type="expenses">Expense</button>
-            <button class="tab" type="button" data-entry-type="incomes">Income</button>
+            <button class="tab active" type="button" data-entry-type="expenses" data-i18n="tabExpense">Gasto</button>
+            <button class="tab" type="button" data-entry-type="incomes" data-i18n="tabIncome">Ingreso</button>
           </div>
 
           <form id="entry-form">
             <input type="hidden" name="type" value="expenses">
             <label>
-              Amount
+              <span data-i18n="labelAmount">Monto</span>
               <input name="amount" type="number" min="0.01" step="0.01" placeholder="125.50" required>
             </label>
             <label>
-              Date
+              <span data-i18n="labelDate">Fecha</span>
               <input name="date" type="date" required>
             </label>
             <label>
-              Tags
-              <input name="tags" type="text" placeholder="food, travel, client" required>
+              <span data-i18n="labelTags">Etiquetas</span>
+              <input name="tags" type="text" placeholder="comida, mercado, clientes" required>
             </label>
             <label>
-              Description
-              <input name="description" type="text" placeholder="What was this for?">
+              <span data-i18n="labelDescription">Descripción</span>
+              <input name="description" type="text" placeholder="¿En qué consistió?">
             </label>
             <label>
-              Account
-              <input name="account" type="text" placeholder="Cash, credit card, checking">
+              <span data-i18n="labelAccount">Cuenta</span>
+              <input name="account" type="text" placeholder="Nequi, Bancolombia, Efectivo">
             </label>
             <label class="checkbox-row" id="verified-row">
               <input name="verified" type="checkbox">
-              Mark expense as already verified
+              <span id="verified-label-text" data-i18n="markExpenseVerified">Marcar gasto como ya verificado</span>
             </label>
-            <button class="primary" type="submit" id="submit-button">Add expense</button>
+            <button class="primary" type="submit" id="submit-button" data-i18n="addExpenseBtn">Agregar gasto</button>
           </form>
         </div>
 
         <div class="panel ai-panel">
-          <p class="eyebrow">AI Assistant</p>
-          <h3>Add with Natural Language</h3>
+          <p class="eyebrow" data-i18n="aiAssistantTitle">Asistente IA</p>
+          <h3 data-i18n="aiAssistantSub">Agregar con Lenguaje Natural</h3>
           <form id="ai-form">
-            <textarea id="ai-text-input" placeholder="e.g., Yesterday I spent 45 dollars on groceries with checking account" rows="3" required></textarea>
+            <textarea id="ai-text-input" placeholder="Ej: Ayer gasté 45000 pesos en mercado con Bancolombia" rows="3" required data-i18n="aiPlaceholder"></textarea>
             <div class="ai-actions">
-              <button class="primary" id="ai-send-btn" type="submit">Send to AI</button>
+              <button class="primary" id="ai-send-btn" type="submit" data-i18n="aiSendBtn">Enviar a la IA</button>
               <button id="ai-mic-btn" type="button" title="Record voice prompt">
                 <span id="mic-icon">🎙️</span>
               </button>
@@ -94,13 +100,13 @@
         <div class="panel list-panel">
           <div class="section-header">
             <div>
-              <p class="eyebrow">Verify and audit</p>
-              <h2>Expenses</h2>
+              <p class="eyebrow" data-i18n="verifyAuditEyebrow">Verificar y auditar</p>
+              <h2 data-i18n="expensesTitle">Gastos</h2>
             </div>
             <select id="expense-filter" aria-label="Filter expenses">
-              <option value="all">All expenses</option>
-              <option value="unverified">Unverified only</option>
-              <option value="verified">Verified only</option>
+              <option value="all" data-i18n="filterAllExpenses">Todos los gastos</option>
+              <option value="unverified" data-i18n="filterUnverifiedOnly">Solo sin verificar</option>
+              <option value="verified" data-i18n="filterVerifiedOnly">Solo verificados</option>
             </select>
           </div>
           <div class="record-list" id="expense-list"></div>
@@ -109,13 +115,13 @@
         <div class="panel list-panel">
           <div class="section-header">
             <div>
-              <p class="eyebrow">Verify and audit</p>
-              <h2>Incomes</h2>
+              <p class="eyebrow" data-i18n="verifyAuditEyebrow">Verificar y auditar</p>
+              <h2 data-i18n="incomesTitle">Ingresos</h2>
             </div>
             <select id="income-filter" aria-label="Filter incomes">
-              <option value="all">All incomes</option>
-              <option value="unverified">Unverified only</option>
-              <option value="verified">Verified only</option>
+              <option value="all" data-i18n="filterAllIncomes">Todos los ingresos</option>
+              <option value="unverified" data-i18n="filterUnverifiedOnly">Solo sin verificar</option>
+              <option value="verified" data-i18n="filterVerifiedOnly">Solo verificados</option>
             </select>
           </div>
           <div class="record-list" id="income-audit-list"></div>
@@ -124,87 +130,70 @@
     </section>
 
       <section class="reports">
-        <div class="section-header">
+        <div class="section-header" style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 12px;">
           <div>
-            <p class="eyebrow">Reports</p>
-            <h2>Spending and Income Analysis</h2>
+            <p class="eyebrow" data-i18n="reportsEyebrow">Reportes</p>
+            <h2 data-i18n="reportsTitle">Análisis de Gastos e Ingresos</h2>
+          </div>
+          
+          <!-- Unified Custom Date Range Controls for ALL Reports -->
+          <div class="report-filters-bar" style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 10px 14px; background: #fff; border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <label for="report-start-date" style="font-size: 12px; font-weight: 600; color: var(--muted);" data-i18n="startDate">Fecha Inicio:</label>
+              <input type="date" id="report-start-date" style="padding: 4px 8px; border-radius: 4px; border: 1px solid var(--line); font-size: 13px;">
+            </div>
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <label for="report-end-date" style="font-size: 12px; font-weight: 600; color: var(--muted);" data-i18n="endDate">Fecha Fin:</label>
+              <input type="date" id="report-end-date" style="padding: 4px 8px; border-radius: 4px; border: 1px solid var(--line); font-size: 13px;">
+            </div>
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <button type="button" class="preset-btn" data-preset="month" style="padding: 4px 8px; border-radius: 4px; border: 1px solid var(--line); background: #f8fafc; font-size: 12px; font-weight: 500; cursor: pointer;" data-i18n="presetThisMonth">Este Mes</button>
+              <button type="button" class="preset-btn" data-preset="year" style="padding: 4px 8px; border-radius: 4px; border: 1px solid var(--line); background: #f8fafc; font-size: 12px; font-weight: 500; cursor: pointer;" data-i18n="presetThisYear">Este Año</button>
+              <button type="button" class="preset-btn" data-preset="all" style="padding: 4px 8px; border-radius: 4px; border: 1px solid var(--line); background: #f8fafc; font-size: 12px; font-weight: 500; cursor: pointer;" data-i18n="presetAllTime">Todo el Histórico</button>
+            </div>
           </div>
         </div>
-        <div class="report-grid">
+
+        <div class="report-grid" style="margin-top: 16px;">
           <div class="panel">
-            <div class="section-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 12px; gap: 8px;">
-              <h3 style="margin-top: 0;">Expenses by tag</h3>
-              <select id="expenses-tag-timeframe" style="padding: 4px 8px; border-radius: 4px; border: 1px solid var(--line); font-size: 13px;">
-                <option value="weekly">This Week</option>
-                <option value="monthly" selected>This Month</option>
-                <option value="yearly">This Year</option>
-                <option value="all">All Time</option>
-              </select>
-            </div>
+            <h3 style="margin-top: 0; margin-bottom: 12px;" data-i18n="expensesByTagTitle">Gastos por etiqueta</h3>
             <div id="expenses-by-tag" class="bar-list"></div>
           </div>
           <div class="panel">
-            <div class="section-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 12px; gap: 8px;">
-              <h3 style="margin-top: 0;">Income by tag</h3>
-              <select id="incomes-tag-timeframe" style="padding: 4px 8px; border-radius: 4px; border: 1px solid var(--line); font-size: 13px;">
-                <option value="weekly">This Week</option>
-                <option value="monthly" selected>This Month</option>
-                <option value="yearly">This Year</option>
-                <option value="all">All Time</option>
-              </select>
-            </div>
+            <h3 style="margin-top: 0; margin-bottom: 12px;" data-i18n="incomeByTagTitle">Ingresos por etiqueta</h3>
             <div id="incomes-by-tag" class="bar-list"></div>
           </div>
-          <!-- New Pie Chart Panel -->
           <div class="panel">
-            <div class="section-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 12px; gap: 8px;">
-              <h3 style="margin-top: 0;">Expenses Tag Breakdown</h3>
-              <select id="pie-timeframe" style="padding: 4px 8px; border-radius: 4px; border: 1px solid var(--line); font-size: 13px;">
-                <option value="weekly">This Week</option>
-                <option value="monthly" selected>This Month</option>
-                <option value="yearly">This Year</option>
-                <option value="all">All Time</option>
-              </select>
-            </div>
+            <h3 style="margin-top: 0; margin-bottom: 12px;" data-i18n="expensesPieTitle">Distribución de Gastos por Etiqueta</h3>
             <div style="position: relative; height: 260px; width: 100%; display: flex; justify-content: center; align-items: center;">
               <canvas id="expenses-pie-chart"></canvas>
             </div>
           </div>
 
-          <!-- Recent Income (regular size instead of wide) -->
           <div class="panel">
-            <h3>Recent income</h3>
-            <div class="record-list compact" id="income-list"></div>
+            <h3 style="margin-top: 0; margin-bottom: 12px;" data-i18n="lastUpdatesTitle">Últimas actualizaciones</h3>
+            <div class="record-list compact" id="recent-updates-list"></div>
           </div>
 
           <!-- Historical Cashflow Graph (wide) -->
           <div class="panel wide">
             <div class="section-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
-              <h3 style="margin-top: 0;">Historical Cashflow</h3>
+              <h3 style="margin-top: 0;" data-i18n="historicalCashflowTitle">Flujo de Caja Histórico</h3>
               <div class="chart-controls" style="display: flex; gap: 8px; align-items: center;">
-                <select id="cashflow-period" style="padding: 4px 8px; border-radius: 4px; border: 1px solid var(--line); font-size: 13px;">
-                  <option value="1">Last 1 Month</option>
-                  <option value="2" selected>Last 2 Months</option>
-                  <option value="3">Last 3 Months</option>
-                  <option value="6">Last 6 Months</option>
-                  <option value="12">Last 1 Year</option>
-                  <option value="36">Last 3 Years</option>
-                  <option value="all">All Time</option>
-                </select>
                 <select id="cashflow-tag-filter" style="padding: 4px 8px; border-radius: 4px; border: 1px solid var(--line); font-size: 13px;">
-                  <option value="all">All Tags</option>
+                  <option value="all" data-i18n="allTags">Todas las etiquetas</option>
                 </select>
               </div>
             </div>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; width: 100%;">
               <div>
-                <h4 style="margin-top: 0; margin-bottom: 8px; font-size: 14px; font-weight: 600; color: var(--muted); text-align: center;">Income & Expenses</h4>
+                <h4 style="margin-top: 0; margin-bottom: 8px; font-size: 14px; font-weight: 600; color: var(--muted); text-align: center;" data-i18n="incomeAndExpenses">Ingresos y Gastos</h4>
                 <div style="position: relative; height: 260px; width: 100%;">
                   <canvas id="cashflow-chart"></canvas>
                 </div>
               </div>
               <div>
-                <h4 style="margin-top: 0; margin-bottom: 8px; font-size: 14px; font-weight: 600; color: var(--muted); text-align: center;">Running Balance</h4>
+                <h4 style="margin-top: 0; margin-bottom: 8px; font-size: 14px; font-weight: 600; color: var(--muted); text-align: center;" data-i18n="runningBalance">Balance Acumulado</h4>
                 <div style="position: relative; height: 260px; width: 100%;">
                   <canvas id="balance-chart"></canvas>
                 </div>
@@ -215,12 +204,54 @@
       </section>
 
       <section class="api-note">
-        <strong>Prototype endpoints:</strong>
+        <strong>Endpoints del prototipo:</strong>
         <code>POST /api/expenses</code>
         <code>POST /api/incomes</code>
         <code>GET /api/reports</code>
       </section>
     </main>
+
+    <!-- Edit Transaction Modal -->
+    <div class="modal-backdrop" id="edit-modal" role="dialog" aria-modal="true">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3 id="edit-modal-title" data-i18n="editModalTitle">Modificar Transacción</h3>
+          <button type="button" class="modal-close" id="edit-modal-close">&times;</button>
+        </div>
+        <form id="edit-form">
+          <input type="hidden" name="id" id="edit-id">
+          <input type="hidden" name="type" id="edit-type">
+          <label>
+            <span data-i18n="labelAmount">Monto</span>
+            <input name="amount" id="edit-amount" type="number" min="0.01" step="0.01" required>
+          </label>
+          <label>
+            <span data-i18n="labelDate">Fecha</span>
+            <input name="date" id="edit-date" type="date" required>
+          </label>
+          <label>
+            <span data-i18n="labelTags">Etiquetas</span>
+            <input name="tags" id="edit-tags" type="text" required>
+          </label>
+          <label>
+            <span data-i18n="labelDescription">Descripción</span>
+            <input name="description" id="edit-description" type="text">
+          </label>
+          <label>
+            <span data-i18n="labelAccount">Cuenta</span>
+            <input name="account" id="edit-account" type="text">
+          </label>
+          <label class="checkbox-row" style="margin-top: 10px;">
+            <input name="verified" id="edit-verified" type="checkbox">
+            <span data-i18n="markExpenseVerified">Marcar como verificado</span>
+          </label>
+          <div class="modal-actions">
+            <button type="button" class="edit-button" id="edit-modal-cancel" data-i18n="btnCancel">Cancelar</button>
+            <button type="submit" class="primary" data-i18n="btnSave">Guardar cambios</button>
+          </div>
+        </form>
+      </div>
+    </div>
 
     <script src="/app.js"></script>
   </body>

@@ -508,3 +508,127 @@ code {
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
+
+/* Micro-Animations & Edit Modal */
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(49, 151, 149, 0); border-color: var(--line); background-color: #fff; }
+  15%, 45%, 75% { box-shadow: 0 0 0 12px rgba(49, 151, 149, 0.35); border-color: var(--primary); background-color: rgba(49, 151, 149, 0.08); }
+  30%, 60%, 90% { box-shadow: 0 0 0 0 rgba(49, 151, 149, 0); border-color: var(--line); background-color: #fff; }
+}
+
+.pulse-updated {
+  animation: pulseGlow 2.2s ease-in-out;
+}
+
+@keyframes flashHighlight {
+  0%, 100% { background-color: var(--panel); transform: scale(1); box-shadow: none; }
+  15%, 45%, 75% { background-color: rgba(49, 151, 149, 0.28); transform: scale(1.015); box-shadow: 0 0 16px rgba(49, 151, 149, 0.45); border-color: var(--primary); }
+  30%, 60%, 90% { background-color: var(--panel); transform: scale(1); box-shadow: none; }
+}
+
+.flash-updated {
+  animation: flashHighlight 2.2s ease-in-out;
+}
+
+/* Edit Pen Button */
+.edit-button {
+  background: #f1f5f9;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  padding: 4px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s ease;
+}
+
+.edit-button:hover {
+  background: #e2e8f0;
+  border-color: #cbd5e1;
+}
+
+/* Edit Modal Dialog */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(3px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.modal-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-card {
+  background: #fff;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 480px;
+  padding: 24px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  transform: scale(0.95);
+  transition: transform 0.2s ease;
+}
+
+.modal-backdrop.active .modal-card {
+  transform: scale(1);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.modal-close {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--muted);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* Type Badge in Last Updates */
+.type-badge {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.type-badge.expense {
+  background: #fed7d7;
+  color: #9b2c2c;
+}
+
+.type-badge.income {
+  background: #c6f6d5;
+  color: #22543d;
+}
+

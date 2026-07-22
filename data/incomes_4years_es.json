@@ -1,7 +1,7 @@
 [
   {
     "id": "48a9516c-ba60-407d-9c90-208866e6f8f3",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2022-08-01",
     "tags": [
       "salario"
@@ -14,7 +14,7 @@
   },
   {
     "id": "927d819c-fac4-4cbd-a03e-2cba25f62d07",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2022-09-01",
     "tags": [
       "salario"
@@ -27,7 +27,7 @@
   },
   {
     "id": "07a60fdd-47b2-4a3e-bcb5-db3d223ee2d1",
-    "amount": 168760,
+    "amount": 168760.0,
     "date": "2022-09-02",
     "tags": [
       "personal",
@@ -41,7 +41,7 @@
   },
   {
     "id": "7e7535c3-861d-4e25-a701-008ed3ee13c8",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2022-10-01",
     "tags": [
       "salario"
@@ -54,7 +54,7 @@
   },
   {
     "id": "6f2da677-87d5-4163-888f-2bf01aca50b7",
-    "amount": 1320000,
+    "amount": 1320000.0,
     "date": "2022-10-28",
     "tags": [
       "freelance",
@@ -68,7 +68,7 @@
   },
   {
     "id": "871eb817-4b89-4f8e-913f-4a15769362cf",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2022-11-01",
     "tags": [
       "salario"
@@ -81,7 +81,7 @@
   },
   {
     "id": "0db13a47-a4e9-4533-bb3a-d9912c4594b1",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2022-12-01",
     "tags": [
       "salario"
@@ -94,7 +94,7 @@
   },
   {
     "id": "a2c2b99a-737d-41cf-8c83-c28ae3fcd975",
-    "amount": 63268,
+    "amount": 63268.0,
     "date": "2022-12-22",
     "tags": [
       "personal",
@@ -108,7 +108,7 @@
   },
   {
     "id": "997372e1-88c8-4a5f-86ab-dfec8f2703fc",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2023-01-01",
     "tags": [
       "salario"
@@ -121,7 +121,7 @@
   },
   {
     "id": "48423bbd-2269-4cbe-bb94-041b962095c1",
-    "amount": 166013,
+    "amount": 166013.0,
     "date": "2023-01-15",
     "tags": [
       "personal",
@@ -135,7 +135,7 @@
   },
   {
     "id": "11a3fb73-08d1-4952-8fc5-50323823d930",
-    "amount": 1740000,
+    "amount": 1740000.0,
     "date": "2023-01-27",
     "tags": [
       "freelance",
@@ -149,7 +149,7 @@
   },
   {
     "id": "2b18082e-c8b3-4984-ad0a-8ccdb795e6ad",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2023-02-01",
     "tags": [
       "salario"
@@ -162,7 +162,7 @@
   },
   {
     "id": "68fbbbaa-09da-4b11-8c24-da92d0409382",
-    "amount": 1320000,
+    "amount": 1320000.0,
     "date": "2023-02-03",
     "tags": [
       "freelance",
@@ -176,7 +176,7 @@
   },
   {
     "id": "016bfc66-8ab7-402f-845f-97ded8ce546d",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2023-03-01",
     "tags": [
       "salario"
@@ -189,7 +189,7 @@
   },
   {
     "id": "0ddaa06d-e64c-4138-93f2-f650077bfa57",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2023-04-01",
     "tags": [
       "salario"
@@ -202,7 +202,7 @@
   },
   {
     "id": "62d8a004-d8e1-47ae-a25d-afcd60ff096f",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2023-05-01",
     "tags": [
       "salario"
@@ -215,7 +215,7 @@
   },
   {
     "id": "b206bf7b-3a85-46ca-a43d-0765e1c9594c",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2023-06-01",
     "tags": [
       "salario"
@@ -228,7 +228,7 @@
   },
   {
     "id": "ab0c44e5-0cc3-4f58-8b10-25a437272e5d",
-    "amount": 1740000,
+    "amount": 1740000.0,
     "date": "2023-06-30",
     "tags": [
       "freelance",
@@ -242,7 +242,7 @@
   },
   {
     "id": "d6ce4225-4ed1-44b0-a734-f40436daa98c",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2023-07-01",
     "tags": [
       "salario"
@@ -255,7 +255,7 @@
   },
   {
     "id": "eca175ef-b577-41c8-b127-a4b5cecaabe9",
-    "amount": 195483,
+    "amount": 195483.0,
     "date": "2023-07-23",
     "tags": [
       "personal",
@@ -269,7 +269,7 @@
   },
   {
     "id": "cd93f266-a875-4ec0-aadc-60160d68f56d",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2023-08-01",
     "tags": [
       "salario"
@@ -282,7 +282,7 @@
   },
   {
     "id": "88a6b681-faf6-4543-85ca-5d2bcf7c76a5",
-    "amount": 132006,
+    "amount": 132006.0,
     "date": "2023-08-09",
     "tags": [
       "personal",
@@ -296,7 +296,7 @@
   },
   {
     "id": "8ff1311d-f132-4818-aa12-9d980ee45d1d",
-    "amount": 1740000,
+    "amount": 1740000.0,
     "date": "2023-08-11",
     "tags": [
       "freelance",
@@ -310,7 +310,7 @@
   },
   {
     "id": "5f98fc9b-f343-42b6-9b17-4c7586a0c1be",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2023-09-01",
     "tags": [
       "salario"
@@ -323,7 +323,7 @@
   },
   {
     "id": "21113f4d-f263-4fc4-b83f-c5ce88b6b38c",
-    "amount": 1320000,
+    "amount": 1320000.0,
     "date": "2023-09-01",
     "tags": [
       "freelance",
@@ -337,7 +337,7 @@
   },
   {
     "id": "bba122ec-4619-478f-87e2-afee1f4934ac",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2023-10-01",
     "tags": [
       "salario"
@@ -350,7 +350,7 @@
   },
   {
     "id": "32178908-453e-44a8-a98c-469d312fad23",
-    "amount": 1740000,
+    "amount": 1740000.0,
     "date": "2023-10-13",
     "tags": [
       "freelance",
@@ -364,7 +364,7 @@
   },
   {
     "id": "8ba64d16-8eff-4147-8efd-516acee1067b",
-    "amount": 1740000,
+    "amount": 1740000.0,
     "date": "2023-10-20",
     "tags": [
       "freelance",
@@ -378,7 +378,7 @@
   },
   {
     "id": "2f986bf0-0278-4d46-94fe-41cccf038af6",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2023-11-01",
     "tags": [
       "salario"
@@ -391,7 +391,7 @@
   },
   {
     "id": "dd6730e4-0c73-4983-9215-320f44d35ed4",
-    "amount": 1320000,
+    "amount": 1320000.0,
     "date": "2023-11-24",
     "tags": [
       "freelance",
@@ -405,7 +405,7 @@
   },
   {
     "id": "23ef739d-af74-4d28-86a6-63e4a17f17dc",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2023-12-01",
     "tags": [
       "salario"
@@ -418,7 +418,7 @@
   },
   {
     "id": "5052efae-c446-4a68-8907-f842872a5fa4",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2024-01-01",
     "tags": [
       "salario"
@@ -431,7 +431,7 @@
   },
   {
     "id": "df787c55-ed54-42f7-a2f4-84ec22ef4314",
-    "amount": 55105,
+    "amount": 55105.0,
     "date": "2024-01-22",
     "tags": [
       "personal",
@@ -445,7 +445,7 @@
   },
   {
     "id": "2d0c8cf8-cdf7-4c7b-97c9-1644517f7b3d",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2024-02-01",
     "tags": [
       "salario"
@@ -458,7 +458,7 @@
   },
   {
     "id": "931d6260-ead1-4843-be20-e3df8b2bfe73",
-    "amount": 178913,
+    "amount": 178913.0,
     "date": "2024-02-15",
     "tags": [
       "personal",
@@ -472,7 +472,7 @@
   },
   {
     "id": "8afb9646-ce03-416f-8658-77c9c94c586e",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2024-03-01",
     "tags": [
       "salario"
@@ -485,7 +485,7 @@
   },
   {
     "id": "9094f822-25ae-43fa-83dc-8415dc621e03",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2024-04-01",
     "tags": [
       "salario"
@@ -498,7 +498,7 @@
   },
   {
     "id": "2ff5ecb0-5aaa-45d7-8fec-939706d7543d",
-    "amount": 1740000,
+    "amount": 1740000.0,
     "date": "2024-04-12",
     "tags": [
       "freelance",
@@ -512,7 +512,7 @@
   },
   {
     "id": "761bd4d9-6284-479b-9b52-5b4050181a33",
-    "amount": 870000,
+    "amount": 870000.0,
     "date": "2024-04-19",
     "tags": [
       "freelance",
@@ -526,7 +526,7 @@
   },
   {
     "id": "e5d08470-258a-4327-bd78-17e595eab66a",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2024-05-01",
     "tags": [
       "salario"
@@ -539,7 +539,7 @@
   },
   {
     "id": "04ee5286-1ace-45ad-b026-d34fc0c42591",
-    "amount": 600000,
+    "amount": 600000.0,
     "date": "2024-05-31",
     "tags": [
       "freelance",
@@ -553,7 +553,7 @@
   },
   {
     "id": "bd6d8721-88cc-4d3b-b0a0-e2c3fccb7304",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2024-06-01",
     "tags": [
       "salario"
@@ -566,7 +566,7 @@
   },
   {
     "id": "4124a63d-7e33-4444-bad3-f46f8a042845",
-    "amount": 1740000,
+    "amount": 1740000.0,
     "date": "2024-06-28",
     "tags": [
       "freelance",
@@ -580,7 +580,7 @@
   },
   {
     "id": "9c77652b-0efc-483f-b22e-3c053f329d4e",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2024-07-01",
     "tags": [
       "salario"
@@ -593,7 +593,7 @@
   },
   {
     "id": "e5dbf64a-16a4-4402-9cfb-fb70c7ff1d52",
-    "amount": 1320000,
+    "amount": 1320000.0,
     "date": "2024-07-05",
     "tags": [
       "freelance",
@@ -607,7 +607,7 @@
   },
   {
     "id": "21f453e2-eea2-44af-9669-548b03603497",
-    "amount": 870000,
+    "amount": 870000.0,
     "date": "2024-07-12",
     "tags": [
       "freelance",
@@ -621,7 +621,7 @@
   },
   {
     "id": "db810282-fdf3-49bc-b289-6112f29af738",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2024-08-01",
     "tags": [
       "salario"
@@ -634,7 +634,7 @@
   },
   {
     "id": "622df06f-dd3f-45e5-99b0-4b202d7d3856",
-    "amount": 117999,
+    "amount": 117999.0,
     "date": "2024-08-21",
     "tags": [
       "personal",
@@ -648,7 +648,7 @@
   },
   {
     "id": "0d8c2613-4056-48ea-adb9-1192b3f861cd",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2024-09-01",
     "tags": [
       "salario"
@@ -661,7 +661,7 @@
   },
   {
     "id": "f6a7a38d-2200-45ed-b01e-46b53cd4bd78",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2024-10-01",
     "tags": [
       "salario"
@@ -674,7 +674,7 @@
   },
   {
     "id": "9d81a737-32f5-468f-b8d9-ea7aef6e030d",
-    "amount": 1320000,
+    "amount": 1320000.0,
     "date": "2024-10-25",
     "tags": [
       "freelance",
@@ -688,7 +688,7 @@
   },
   {
     "id": "2920812c-c6c8-438d-b321-599762171000",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2024-11-01",
     "tags": [
       "salario"
@@ -701,7 +701,7 @@
   },
   {
     "id": "1343ec11-c6b2-4315-908e-ce5ba1ae1a7a",
-    "amount": 157098,
+    "amount": 157098.0,
     "date": "2024-11-06",
     "tags": [
       "personal",
@@ -715,7 +715,7 @@
   },
   {
     "id": "cd8f24ff-b01d-4e26-b86f-31c99d233e10",
-    "amount": 67032,
+    "amount": 67032.0,
     "date": "2024-11-25",
     "tags": [
       "personal",
@@ -729,7 +729,7 @@
   },
   {
     "id": "daf219a8-164b-40e7-bbbc-5452cf774513",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2024-12-01",
     "tags": [
       "salario"
@@ -742,7 +742,7 @@
   },
   {
     "id": "0d9c9dbc-5f97-4317-a365-062df82a02fa",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2025-01-01",
     "tags": [
       "salario"
@@ -755,7 +755,7 @@
   },
   {
     "id": "1d42dc06-e325-4d77-b0f2-ac0383b46233",
-    "amount": 163018,
+    "amount": 163018.0,
     "date": "2025-01-30",
     "tags": [
       "personal",
@@ -769,7 +769,7 @@
   },
   {
     "id": "de36c0e8-4c19-4534-8833-07ad66990231",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2025-02-01",
     "tags": [
       "salario"
@@ -782,7 +782,7 @@
   },
   {
     "id": "9a45de71-1327-408b-9cb7-48774efcdf04",
-    "amount": 600000,
+    "amount": 600000.0,
     "date": "2025-02-14",
     "tags": [
       "freelance",
@@ -796,7 +796,7 @@
   },
   {
     "id": "ced30c04-aff3-4504-b19d-dd35a0bf3e6a",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2025-03-01",
     "tags": [
       "salario"
@@ -809,7 +809,7 @@
   },
   {
     "id": "df177fe7-ffae-4978-ba2c-87e554f6b254",
-    "amount": 72827,
+    "amount": 72827.0,
     "date": "2025-03-03",
     "tags": [
       "personal",
@@ -823,7 +823,7 @@
   },
   {
     "id": "560eea7e-a670-4b78-acff-ea2ec2d19535",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2025-04-01",
     "tags": [
       "salario"
@@ -836,7 +836,7 @@
   },
   {
     "id": "dc3a0430-5257-433e-9242-227df1631714",
-    "amount": 870000,
+    "amount": 870000.0,
     "date": "2025-04-04",
     "tags": [
       "freelance",
@@ -850,7 +850,7 @@
   },
   {
     "id": "1ccac7fb-9fb5-4182-8432-483070a27601",
-    "amount": 600000,
+    "amount": 600000.0,
     "date": "2025-04-11",
     "tags": [
       "freelance",
@@ -864,7 +864,7 @@
   },
   {
     "id": "17a70d0a-5762-42f2-b730-dda785200c7a",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2025-05-01",
     "tags": [
       "salario"
@@ -877,7 +877,7 @@
   },
   {
     "id": "393c792c-a0ac-4038-b7ff-e933d7e78aee",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2025-06-01",
     "tags": [
       "salario"
@@ -890,7 +890,7 @@
   },
   {
     "id": "e81110da-8693-4aa7-9938-045314dfce3e",
-    "amount": 176049,
+    "amount": 176049.0,
     "date": "2025-06-27",
     "tags": [
       "personal",
@@ -904,7 +904,7 @@
   },
   {
     "id": "cc07889f-7574-4408-a148-cb240b3aa98b",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2025-07-01",
     "tags": [
       "salario"
@@ -917,7 +917,7 @@
   },
   {
     "id": "cd50b834-e6cf-4891-8c1e-5783e002df91",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2025-08-01",
     "tags": [
       "salario"
@@ -930,7 +930,7 @@
   },
   {
     "id": "1d3943e7-3283-4080-90f8-c1d297e47611",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2025-09-01",
     "tags": [
       "salario"
@@ -943,7 +943,7 @@
   },
   {
     "id": "d67ab75f-9166-4c3b-ab15-d9f419c47eac",
-    "amount": 1740000,
+    "amount": 1740000.0,
     "date": "2025-09-12",
     "tags": [
       "freelance",
@@ -957,7 +957,7 @@
   },
   {
     "id": "27885f7e-b1e9-4b02-a558-ec4fc132496a",
-    "amount": 1740000,
+    "amount": 1740000.0,
     "date": "2025-09-19",
     "tags": [
       "freelance",
@@ -971,7 +971,7 @@
   },
   {
     "id": "0f16b765-1c1f-46e8-b58a-493a2f64befb",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2025-10-01",
     "tags": [
       "salario"
@@ -984,7 +984,7 @@
   },
   {
     "id": "d764cf68-c2cd-4328-bd19-1c5cc51fc8b7",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2025-11-01",
     "tags": [
       "salario"
@@ -997,7 +997,7 @@
   },
   {
     "id": "3bd001a9-3679-4458-96f8-6d97f5336284",
-    "amount": 201182,
+    "amount": 201182.0,
     "date": "2025-11-08",
     "tags": [
       "personal",
@@ -1011,7 +1011,7 @@
   },
   {
     "id": "c6a6393f-47a3-4f5e-b058-77ec696659fa",
-    "amount": 188130,
+    "amount": 188130.0,
     "date": "2025-11-20",
     "tags": [
       "personal",
@@ -1025,7 +1025,7 @@
   },
   {
     "id": "1b3f0978-4f86-4213-8c76-2b232f26f9a9",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2025-12-01",
     "tags": [
       "salario"
@@ -1038,7 +1038,7 @@
   },
   {
     "id": "9c065274-716d-4380-a0c7-4016ef6c5bc8",
-    "amount": 203820,
+    "amount": 203820.0,
     "date": "2025-12-11",
     "tags": [
       "personal",
@@ -1052,7 +1052,7 @@
   },
   {
     "id": "3af2eb57-367a-48a8-8780-1feba57bf35b",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2026-01-01",
     "tags": [
       "salario"
@@ -1065,7 +1065,7 @@
   },
   {
     "id": "34e7ff1f-cf92-4685-8c80-aa15b4424043",
-    "amount": 600000,
+    "amount": 600000.0,
     "date": "2026-01-30",
     "tags": [
       "freelance",
@@ -1079,7 +1079,7 @@
   },
   {
     "id": "b6037a4e-588e-4f3e-8206-6b7842f9c285",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2026-02-01",
     "tags": [
       "salario"
@@ -1092,7 +1092,7 @@
   },
   {
     "id": "30202dec-740c-4f60-bb89-0bffd2809a3f",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2026-03-01",
     "tags": [
       "salario"
@@ -1105,7 +1105,7 @@
   },
   {
     "id": "85439aa4-4e20-4de7-b42b-e3a0d5b67535",
-    "amount": 1740000,
+    "amount": 1740000.0,
     "date": "2026-03-06",
     "tags": [
       "freelance",
@@ -1119,7 +1119,7 @@
   },
   {
     "id": "9b459c94-95ed-4da8-92c4-fd0401880469",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2026-04-01",
     "tags": [
       "salario"
@@ -1132,7 +1132,7 @@
   },
   {
     "id": "caca4f2a-a710-44d1-a982-133be3f8b223",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2026-05-01",
     "tags": [
       "salario"
@@ -1145,7 +1145,7 @@
   },
   {
     "id": "4638d6a8-a738-4bfa-8920-0ec5d25884fb",
-    "amount": 1320000,
+    "amount": 1320000.0,
     "date": "2026-05-08",
     "tags": [
       "freelance",
@@ -1159,7 +1159,7 @@
   },
   {
     "id": "02ce87a9-df6f-4707-8b81-30c6dc8ecf23",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2026-06-01",
     "tags": [
       "salario"
@@ -1172,7 +1172,7 @@
   },
   {
     "id": "8992c5e9-f07c-4cbc-a71f-ae3abb99222b",
-    "amount": 1320000,
+    "amount": 1320000.0,
     "date": "2026-06-12",
     "tags": [
       "freelance",
@@ -1186,7 +1186,7 @@
   },
   {
     "id": "2de25d02-9594-4b1b-b1ef-542473f54de8",
-    "amount": 4350000,
+    "amount": 4350000.0,
     "date": "2026-07-01",
     "tags": [
       "salario"
@@ -1199,7 +1199,7 @@
   },
   {
     "id": "92df49d7-d1c2-4dd8-bd6f-e5d3a9dc20db",
-    "amount": 128391,
+    "amount": 128391.0,
     "date": "2026-07-05",
     "tags": [
       "personal",
@@ -1210,18 +1210,5 @@
     "verified": true,
     "createdAt": "2026-07-05T12:00:00.000Z",
     "updatedAt": "2026-07-05T12:00:00.000Z"
-  },
-  {
-    "id": "89a0f740-aef4-4a1a-8f03-792a43277b4d",
-    "amount": 2000000,
-    "date": "2026-07-19",
-    "tags": [
-      "reembolso"
-    ],
-    "description": "Pago de deuda de sobrino",
-    "account": "efectivo",
-    "verified": false,
-    "createdAt": "2026-07-22T01:30:24.195Z",
-    "updatedAt": "2026-07-22T01:30:24.195Z"
   }
 ]
